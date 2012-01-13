@@ -1,4 +1,4 @@
 # Application dependencies
 
 require:
-    - play
+    - play -> playapps 1.4
