@@ -5,7 +5,11 @@ project.description=Информационно-аналитическая сис
 
 form.login.entrance=Вход
 form.login.registration=Регистрация
-form.login.email=Электронная почта
+form.login.username=Имя пользователя
 form.login.password=Пароль
-form.login.enter=Войти
+form.login.login=Войти
 form.login.register=Зарегистрироваться
+form.login.validation.wrong-credentials = Неверное имя пользователя или пароль
+form.login.validation.username-unavailable = Имя пользователя занято
+
+action.logout = Выход

@@ -1,67 +1,49 @@
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <title>#{get 'title'/}</title>
-        <link rel='stylesheet' type='text/css' media='screen' href='@{'/public/style/bootstrap.min.css'}'/>
-        <link rel='stylesheet/less' type='text/css' media='screen' href='@{'/public/style/screen.less'}'/>
-	    <script type='text/javascript' src='http://lesscss.googlecode.com/files/less-1.2.0.min.js'></script>
-	    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
-	    <script type='text/javascript' src='@{'/public/js/bootstrap/bootstrap-tabs.js'}'></script>
-
-        *{#{get 'moreStyles' /}}*
-        *{<link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">}*
-        *{<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>}*
-        *{#{get 'moreScripts' /}}*
-    </head>
-    <body>
-	    <div class='container'>
-	        <div class='row'>
-		        <div class='span8'>
-					<div id='logo'>&{'project.name'}</div>
-			        <div id='description'>&{'project.description'}</div>
-		        </div>
-				<div class='span8'>
-					<ul id='form-selector' class='pills input-shift' data-pills='pills'>
-						<li class='active'><a href='#form-entrance'>&{'form.login.entrance'}</a></li>
-						<li><a href='#form-registration'>&{'form.login.registration'}</a></li>
-					</ul>
-					<div class='tab-content'>
-						<div id='form-entrance' class='active'>
-							<form action='@{UserController.enter}' method='post'>
-								<div class='clearfix #{ifErrors}error#{/ifErrors}'>
-									<label for='form-email-1'>&{'form.login.email'}</label>
-									<div class='input'><input id='form-email-1' name='email' type='email' class='span4' value='${flash.email}'/></div>
-								</div>
-								<div class='clearfix #{ifErrors}error#{/ifErrors}'>
-									<label for='form-password-1'>&{'form.login.password'}</label>
-									<div class='input'><input id='form-password-1' name='password' type='password' class='span4' value='${flash.password}'/></div>
-								</div>
-								<div class='clearfix'>
-									<div class='input'><input type="submit" class="btn primary" value="&{'form.login.enter'}"/></div>
-								</div>
-							</form>
+#{extends 'template.html'/}
+<div id='home-container' class='container'>
+    <div class='row'>
+        <div class='span8'>
+			<div id='logo'>&{'project.name'}</div>
+	        <div id='description'>&{'project.description'}</div>
+        </div>
+		<div class='span8'>
+			<ul id='form-selector' class='pills input-shift' data-pills='pills'>
+				<li#{if null == flash.action || 'login' == flash.action} class='active'#{/if}><a href='#form-entrance'>&{'form.login.entrance'}</a></li>
+				<li#{if 'register' == flash.action} class='active'#{/if}><a href='#form-registration'>&{'form.login.registration'}</a></li>
+			</ul>
+			<div class='tab-content'>
+				<div id='form-entrance'#{if null == flash.action || 'login' == flash.action} class='active'#{/if}>
+					#{form @HomeController.login()}
+						<input type='hidden' name='action' value='login'/>
+						<div class='clearfix#{ifError 'username'} error#{/ifError}'>
+							<label for='form-username-1'>&{'form.login.username'}</label>
+							<div class='input'><input id="form-username-1" name="username" type='text' class='span4' value='${flash.username}'/></div>
 						</div>
-						<div id='form-registration'>
-							<form action='@{UserController.register}' method='post'>
-								<div class='clearfix #{ifErrors}error#{/ifErrors}'>
-									<label for='form-email-1'>&{'form.login.email'}</label>
-									<div class='input'><input id='form-email-2' name='email' type='email' class='span4' value='${flash.email}'/></div>
-								</div>
-								<div class='clearfix #{ifErrors}error#{/ifErrors}'>
-									<label for='form-password-1'>&{'form.login.password'}</label>
-									<div class='input'><input id='form-password-2' name='password' type='password' class='span4' value='${flash.password}'/></div>
-								</div>
-								<div class='clearfix'>
-									<div class='input'><input type="submit" class="btn primary" value="&{'form.login.register'}"/></div>
-								</div>
-							</form>
+						<div class='clearfix#{ifError 'password'} error#{/ifError}'>
+							<label for='form-password-1'>&{'form.login.password'}</label>
+							<div class='input'><input id='form-password-1' name='password' type='password' class='span4' value='${flash.password}'/></div>
 						</div>
-					</div>
+						<div class='clearfix'>
+							<div class='input'><input type="submit" class="btn primary" value="&{'form.login.login'}"/></div>
+						</div>
+					#{/form}
 				</div>
-
-	            *{#{doLayout/}}*
-	        </div>
-	    </div>
-    </body>
-</html>
+				<div id='form-registration'#{if 'register' == flash.action} class='active'#{/if}>
+					#{form @HomeController.register()}
+						<input type='hidden' name='action' value='register'/>
+						<div class='clearfix#{ifError 'username'} error#{/ifError}'>
+							<label for='form-username-1'>&{'form.login.username'}</label>
+							<div class='input'><input id="form-username-2" name="username" type='text' class='span4' value='${flash.username}'/></div>
+						</div>
+						<div class='clearfix#{ifError 'password'} error#{/ifError}'>
+							<label for='form-password-1'>&{'form.login.password'}</label>
+							<div class='input'><input id='form-password-2' name='password' type='password' class='span4' value='${flash.password}'/></div>
+						</div>
+						<div class='clearfix'>
+							<div class='input'><input type="submit" class="btn primary" value="&{'form.login.register'}"/></div>
+						</div>
+					#{/form}
+				</div>
+			</div>
+		</div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 /* Variables */
-@pageM: 200px;
+@pageMV: 50px;
 
 /* Open Sans font */
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400&subset=latin,cyrillic');
@@ -14,8 +14,11 @@ body, label, input, select, textarea, .btn .close, .alert-message .close {
 }
 
 body {
-    margin-top: @pageM;
-    margin-top: @pageM;
+    margin: @pageMV 0 @pageMV 0;
+}
+
+div#home-container {
+	margin-top: 4 * @pageMV;
 }
 
 div#logo {

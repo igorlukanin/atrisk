@@ -1,13 +1,15 @@
 # Routes
 
-# Home pages
+# General pages
 GET /               HomeController.root
 
 # Login control pages
-POST /enter         UserController.enter
-POST /register      UserController.register
+POST /login         HomeController.login
+POST /register      HomeController.register
+GET  /logout        HomeController.logout
 
 # Risk management pages
+GET /main           RiskController.main
 # GET /context      RiskController.context
 # GET /id           RiskController.id
 # GET /analysis     RiskController.analysis

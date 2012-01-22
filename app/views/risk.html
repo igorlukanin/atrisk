@@ -1,0 +1,14 @@
+#{extends 'template.html'/}
+
+<div class='container'>
+	<div class='row'>
+		<div class='span15'>
+			<div id='logo'>&{'project.name'}</div>
+		</div>
+		<div class='span1'>
+			<a href='@{HomeController.logout()}'>&{'action.logout'}</a>
+		</div>
+	</div>
+</div>
+
+#{doLayout/}
