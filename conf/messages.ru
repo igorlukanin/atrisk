@@ -13,3 +13,11 @@ form.login.validation.wrong-credentials = Неверное имя пользов
 form.login.validation.username-unavailable = Имя пользователя занято
 
 action.logout = Выход
+
+menu.main = Обзор
+menu.context = Контекст
+menu.id = Идентификация
+menu.analysis = Анализ
+menu.evaluation = Оценка
+menu.treatment = Обработка
+menu.acceptance = Принятие
