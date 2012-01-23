@@ -6,11 +6,18 @@
         <link rel='stylesheet' type='text/css' media='screen' href='@{'/public/style/bootstrap.min.css'}'/>
         <link rel='stylesheet/less' type='text/css' media='screen' href='@{'/public/style/screen.less'}'/>
 	    <link rel='shortcut icon' type='image/png' href='@{'/public/image/visualpharm/umbrella.png'}'/>
-	    <script type='text/javascript' src='http://lesscss.googlecode.com/files/less-1.2.0.min.js'></script>
-	    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+	    <script type='text/javascript' src='@{'/public/js/less/less-1.2.0.min.js'}'></script>
+	    <script type='text/javascript' src='@{'/public/js/jquery/jquery-1.7.1.min.js'}'></script>
 	    <script type='text/javascript' src='@{'/public/js/bootstrap/bootstrap-tabs.js'}'></script>
+	    <script type='text/javascript' src='@{'/public/js/jquery/jquery.inputhints.min.js'}'></script>
     </head>
     <body>
         #{doLayout/}
+
+        <script type='text/javascript'>
+	        $(document).ready(function() {
+		        $('input[title]').inputHints();
+	        });
+        </script>
     </body>
 </html>

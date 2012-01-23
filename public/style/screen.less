@@ -1,6 +1,6 @@
 /* Variables */
 @pageMV: 50px;
-@importantC: #c43c35;
+@dangerC: #c43c35;
 
 /* Open Sans font */
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400&subset=latin,cyrillic');
@@ -9,12 +9,16 @@
 	margin: 0;
 }
 
-a.important {
-	color: @importantC;
+a.danger {
+	color: @dangerC;
+}
+
+a.disabled {
+	color: #cccccc;
 }
 
 body, label, input, select, textarea, .btn .close, .alert-message .close {
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
 }
 
@@ -22,23 +26,54 @@ body {
     margin: @pageMV 0 @pageMV 0;
 }
 
+h1 {
+    font-size: 2em;
+	font-weight: 300;
+}
+
 div#home-container {
 	margin-top: 4 * @pageMV;
 }
 
 div#logo {
-	font-family: 'Open Sans';
+	/*font-family: 'Open Sans', sans-serif;*/
 	font-size: 4em;
 	font-weight: 300;
 	margin-top: 0.115em;
 }
 
 div#description {
-	font-family: 'Open Sans';
+	/*font-family: 'Open Sans', sans-serif;*/
 	font-size: 2em;
 	font-weight: 300;
 	line-height: 1.25em;
 	margin-top: 1.25em;
+}
+
+div.content {
+	margin-top: @pageMV / 2;
+	margin-bottom: @pageMV / 2;
+}
+
+/*div.row div.right {*/
+	/*text-align: right;*/
+/*}*/
+
+table td {
+    border-top: none;
+}
+
+table tr {
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+table tr:first-child {
+    border-top: none;
+}
+
+table td.tail {
+	text-align: right;
 }
 
 ul.input-shift {

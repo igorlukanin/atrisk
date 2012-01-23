@@ -1,24 +1,29 @@
 # Routes
 
 # General pages
-GET  /              HomeController.root
+GET  /                                              HomeController.root
 
 # Login control pages
-POST /login         HomeController.login
-POST /register      HomeController.register
-GET  /logout        HomeController.logout
+POST /login                                         HomeController.login
+POST /register                                      HomeController.register
+GET  /logout                                        HomeController.logout
 
 # Risk management pages
-GET  /main          RiskController.main
-GET  /context       RiskController.context
-GET  /id            RiskController.id
-GET  /analysis      RiskController.analysis
-GET  /evaluation    RiskController.evaluation
-GET  /treatment     RiskController.treatment
-GET  /acceptance    RiskController.acceptance
+GET  /main                                          RiskController.main
+GET  /context                                       RiskController.context
+POST /context/criterion/add                         RiskController.addCriterion
+GET  /context/criterion/delete                      RiskController.deleteCriterion
+GET  /context/criterion/evaluation/{id}/{value}     RiskController.setCriterionEvaluation
+GET  /context/criterion/impact/{id}/{value}         RiskController.setCriterionImpact
+GET  /context/criterion/acceptance/{id}/{value}     RiskController.setCriterionAcceptance
+GET  /id                                            RiskController.id
+GET  /analysis                                      RiskController.analysis
+GET  /evaluation                                    RiskController.evaluation
+GET  /treatment                                     RiskController.treatment
+GET  /acceptance                                    RiskController.acceptance
 
 # Map static resources from the /app/public folder to the /public path
-GET  /public/       staticDir:public
+GET  /public/                                       staticDir:public
 
 # Catch all, respond with 404
-*    /*             404
+*    /*                                             404
