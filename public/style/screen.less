@@ -3,7 +3,19 @@
 @dangerC: #c43c35;
 
 /* Open Sans font */
-@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400&subset=latin,cyrillic');
+@font-face {
+	font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url('opensans/Open Sans.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Open Sans Light'), local('OpenSans-Light'), url('opensans/Open Sans Light.woff') format('woff');
+}
 
 * {
 	margin: 0;
