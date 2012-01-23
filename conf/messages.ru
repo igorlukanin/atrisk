@@ -3,9 +3,9 @@
 project.name=atrisk
 project.description=Информационно-аналитическая система поддержки процесса управления рисками информационной безопасности
 
-form.criteria.evaluation=Значимость
-form.criteria.impact=Ущерб
-form.criteria.acceptance=Принятие
+form.criteria.evaluation=Значимость рисков
+form.criteria.impact=Ущерб от рисков
+form.criteria.acceptance=Принятие рисков
 form.criteria.criterion=Новый критерий...
 form.criteria.delete=✕
 

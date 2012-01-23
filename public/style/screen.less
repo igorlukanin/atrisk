@@ -1,6 +1,6 @@
 /* Variables */
-@pageMV: 50px;
-@dangerC: #c43c35;
+@dangerColor:   #c43c35;
+@disabledColor: #cccccc;
 
 /* Open Sans font */
 @font-face {
@@ -17,16 +17,12 @@
     src: local('Open Sans Light'), local('OpenSans-Light'), url('opensans/Open Sans Light.woff') format('woff');
 }
 
-* {
-	margin: 0;
-}
-
 a.danger {
-	color: @dangerC;
+	color: @dangerColor;
 }
 
 a.disabled {
-	color: #cccccc;
+	color: @disabledColor;
 }
 
 body, label, input, select, textarea, .btn .close, .alert-message .close {
@@ -35,7 +31,7 @@ body, label, input, select, textarea, .btn .close, .alert-message .close {
 }
 
 body {
-    margin: @pageMV 0 @pageMV 0;
+	margin: 5em 0 5em 0;
 }
 
 h1 {
@@ -43,49 +39,37 @@ h1 {
 	font-weight: 300;
 }
 
-div#home-container {
-	margin-top: 4 * @pageMV;
+div.top-shift {
+	margin-top: 15em;
 }
 
-div#logo {
-	/*font-family: 'Open Sans', sans-serif;*/
+h1.logo {
 	font-size: 4em;
 	font-weight: 300;
-	margin-top: 0.115em;
 }
 
-div#description {
-	/*font-family: 'Open Sans', sans-serif;*/
-	font-size: 2em;
-	font-weight: 300;
-	line-height: 1.25em;
-	margin-top: 1.25em;
+div.menu {
+	margin-bottom: 2em;
 }
 
-div.content {
-	margin-top: @pageMV / 2;
-	margin-bottom: @pageMV / 2;
+div.row div.right * {
+	float: right;
 }
 
-/*div.row div.right {*/
-	/*text-align: right;*/
-/*}*/
+div.row div.right ul {
+    margin-top: .2em;
+}
 
 table td {
     border-top: none;
 }
 
 table tr {
-    vertical-align: top;
     border-top: 1px solid #ddd;
 }
 
 table tr:first-child {
     border-top: none;
-}
-
-table td.tail {
-	text-align: right;
 }
 
 ul.input-shift {
