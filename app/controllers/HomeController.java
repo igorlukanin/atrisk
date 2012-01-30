@@ -1,10 +1,9 @@
 package controllers;
 
-import models.User;
-import play.data.validation.Validation;
-import play.i18n.Messages;
-import play.mvc.Before;
-import play.mvc.Controller;
+import models.*;
+import play.data.validation.*;
+import play.i18n.*;
+import play.mvc.*;
 
 public class HomeController extends Controller {
     @Before(unless = "logout")
@@ -44,7 +43,8 @@ public class HomeController extends Controller {
     }
     
     private static void login(User user) {
-        session.put("user",user);
+        session.put("user",user.id);
+        session.put("scope",user.scopes.get(0).id);
         redirect("RiskController.main");
     }
 

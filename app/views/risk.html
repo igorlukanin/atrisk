@@ -25,6 +25,18 @@
 
 <div class='container'>
 	<div class='row'>
-		<div class='span16 right'><a class='btn' href='@{HomeController.logout}'>&{'action.logout'}</a></div>
+		<div class='span12'>
+			<a id='action-enable-notes' href='#'>&{'action.enable-notes'}</a>&nbsp;
+		</div>
+		<div class='span4 right'><a class='btn' href='@{HomeController.logout}'>&{'action.logout'}</a></div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(function() {
+		$("#action-enable-notes").click(function() {
+			$(this).hide();
+			$(".alert-message").show();
+		});
+	});
+</script>

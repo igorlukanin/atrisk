@@ -1,3 +1,96 @@
 #{extends 'risk.html'/}
 #{set title:messages.get('project.name')/}
 
+<div class='container'>
+	<div class='row'>
+		<div class='span16'>
+			<h1>&{'page.id.asset.title'}</h1>
+
+			<h2>&{'page.id.primary-asset.title'}</h2>
+
+			<div class="alert-message block-message info">
+				<p>&{'page.id.primary-asset.info.0'}</p>
+				<p>&{'page.id.primary-asset.info.1'}</p>
+				<p>&{'page.id.primary-asset.info.2'}</p>
+			</div>
+
+			<table class='condensed-table'>
+				<tbody>
+				#{list items:primaryAssets, as:'asset'}
+				<tr>
+					<td width='50%'>${asset.name}</td>
+					<td>
+						#{if 'PROCESS' == asset.type.toString()}&{'form.primary-asset.type.process'}#{/if}
+						#{else}<a class='disabled' href='@{RiskController.setPrimaryAssetTypeProcess(asset.id)}'>&{'form.primary-asset.type.process'}</a>#{/else}
+					</td>
+					<td>
+						#{if 'INFO' == asset.type.toString()}&{'form.primary-asset.type.info'}#{/if}
+						#{else}<a class='disabled' href='@{RiskController.setPrimaryAssetTypeInfo(asset.id)}'>&{'form.primary-asset.type.info'}</a>#{/else}
+					</td>
+					<td class='tail'><a class='danger' href='@{RiskController.deletePrimaryAsset(asset.id)}'>&{'form.delete'}</a></td>
+				</tr>
+				#{/list}
+				</tbody>
+			</table>
+
+			#{form @RiskController.addPrimaryAsset()}
+			<div class='clearfix#{ifError 'name'} error#{/ifError}'>
+				<input class='span8' name='name' type='text' value='${flash.name}' title='&{'form.primary-asset.asset'}'/>
+			</div>
+			#{/form}
+
+			<h2>&{'page.id.supporting-asset.title'}</h2>
+
+			<div class="alert-message block-message info">
+				<p>&{'page.id.supporting-asset.info.0'}</p>
+				<p>&{'page.id.supporting-asset.info.1'}</p>
+				<p>&{'page.id.supporting-asset.info.2'}</p>
+				<p>&{'page.id.supporting-asset.info.3'}</p>
+				<p>&{'page.id.supporting-asset.info.4'}</p>
+				<p>&{'page.id.supporting-asset.info.5'}</p>
+				<p>&{'page.id.supporting-asset.info.6'}</p>
+			</div>
+
+			<table class='condensed-table'>
+				<tbody>
+				#{list items:supportingAssets, as:'asset'}
+				<tr>
+					<td width='50%'>${asset.name}</td>
+					<td>
+						#{if 'HARDWARE' == asset.type.toString()}&{'form.supporting-asset.type.hardware'}#{/if}
+						#{else}<a class='disabled' href='@{RiskController.setSupportingAssetTypeHardware(asset.id)}'>&{'form.supporting-asset.type.hardware'}</a>#{/else}
+					</td>
+					<td>
+						#{if 'SOFTWARE' == asset.type.toString()}&{'form.supporting-asset.type.software'}#{/if}
+						#{else}<a class='disabled' href='@{RiskController.setSupportingAssetTypeSoftware(asset.id)}'>&{'form.supporting-asset.type.software'}</a>#{/else}
+					</td>
+					<td>
+						#{if 'NETWORK' == asset.type.toString()}&{'form.supporting-asset.type.network'}#{/if}
+						#{else}<a class='disabled' href='@{RiskController.setSupportingAssetTypeNetwork(asset.id)}'>&{'form.supporting-asset.type.network'}</a>#{/else}
+					</td>
+					<td>
+						#{if 'PERSONNEL' == asset.type.toString()}&{'form.supporting-asset.type.personnel'}#{/if}
+						#{else}<a class='disabled' href='@{RiskController.setSupportingAssetTypePersonnel(asset.id)}'>&{'form.supporting-asset.type.personnel'}</a>#{/else}
+					</td>
+					<td>
+						#{if 'SITE' == asset.type.toString()}&{'form.supporting-asset.type.site'}#{/if}
+						#{else}<a class='disabled' href='@{RiskController.setSupportingAssetTypeSite(asset.id)}'>&{'form.supporting-asset.type.site'}</a>#{/else}
+					</td>
+					<td>
+						#{if 'ORGANIZATION' == asset.type.toString()}&{'form.supporting-asset.type.organization'}#{/if}
+						#{else}<a class='disabled' href='@{RiskController.setSupportingAssetTypeOrganization(asset.id)}'>&{'form.supporting-asset.type.organization'}</a>#{/else}
+					</td>
+					<td class='tail'><a class='danger' href='@{RiskController.deleteSupportingAsset(asset.id)}'>&{'form.delete'}</a></td>
+				</tr>
+				#{/list}
+				</tbody>
+			</table>
+
+			#{form @RiskController.addSupportingAsset()}
+			<div class='clearfix#{ifError 'name'} error#{/ifError}'>
+				<input class='span8 drill-supporting-asset' name='name' type='text' value='${flash.name}' title='&{'form.supporting-asset.asset'}'/>
+			</div>
+			#{/form}
+		</div>
+	</div>
+</div>

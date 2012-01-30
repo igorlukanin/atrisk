@@ -1,7 +1,36 @@
 #{extends 'risk.html'/}
 #{set title:messages.get('project.name')/}
-
+*{<div class="alert-message block-message info">}*
+	*{<p>&{'page.context.hint.general.1'}</p>}*
+	*{<p>}*
+	*{#{if scope.commercial}&{'page.context.hint.commercial.1'}#{/if}}*
+					*{#{else}&{'page.context.hint.commercial.2'}#{/else}}*
+	*{</p>}*
+*{</div>}*
 <div class='container'>
+	<div class='row'>
+		<div class='span16'>
+			<h1>&{'page.context.scope.title'}</h1>
+
+			#{form @RiskController.setScope()}
+				<div class='clearfix'>
+					<label for='form-name'>&{'form.scope.name'}</label>
+					<div class='input'><textarea enter-driven id="form-name" name="name" class='span13'>${scope.name}</textarea></div>
+				</div>
+				<div class="clearfix">
+					<label class='text-input'>&{'form.scope.aim'}</label>
+					<div class='input text-input'>
+						#{if scope.commercial}<a href='@{RiskController.setScopeCommercial(false)}'>&{'form.scope.aim.1'}</a>#{/if}
+						#{else}<a href='@{RiskController.setScopeCommercial(true)}'>&{'form.scope.aim.2'}</a>#{/else}
+					</div>
+				</div>
+				<div class="clearfix">
+					<label for="boundaries">&{'form.scope.boundaries'}</label>
+					<div class="input"><textarea enter-driven class="span6" id="boundaries" name="boundaries" rows="5">${scope.boundaries}</textarea></div>
+				</div>
+			#{/form}
+		</div>
+	</div>
 	<div class='row'>
 		<div class='span16'>
 			<h1>&{'page.context.criteria.title'}</h1>
@@ -23,7 +52,7 @@
 							#{if criterion.acceptance}<a href='@{RiskController.setCriterionAcceptance(criterion.id,false)}'>&{'form.criteria.acceptance'}</a>#{/if}
 							#{else}<a class='disabled' href='@{RiskController.setCriterionAcceptance(criterion.id,true)}'>&{'form.criteria.acceptance'}</a>#{/else}
 						</td>
-						<td><a class='danger' href='@{RiskController.deleteCriterion(criterion.id)}'>&{'form.criteria.delete'}</a></td>
+						<td><a class='danger' href='@{RiskController.deleteCriterion(criterion.id)}'>&{'form.delete'}</a></td>
 					</tr>
 					#{/list}
 				</tbody>

@@ -31,11 +31,16 @@ body, label, input, select, textarea, .btn .close, .alert-message .close {
 }
 
 body {
-	margin: 5em 0 5em 0;
+	margin: 3em 0 5em 0;
 }
 
 h1 {
     font-size: 2em;
+	font-weight: 300;
+}
+
+h2 {
+    font-size: 1.5em;
 	font-weight: 300;
 }
 
@@ -48,8 +53,8 @@ h1.logo {
 	font-weight: 300;
 }
 
-div.menu {
-	margin-bottom: 2em;
+div.row {
+	margin-top: 2em;
 }
 
 div.row div.right * {
@@ -72,6 +77,36 @@ table tr:first-child {
     border-top: none;
 }
 
+table td.tail {
+	text-align: right;
+}
+
 ul.input-shift {
-	margin-left: 150px;
+	margin-left: 180px;
+}
+
+form label {
+	width: 160px;
+}
+
+form .input {
+    margin-left: 180px;
+}
+
+form .text-input {
+	padding: 0px;
+	line-height: inherit;
+}
+
+.alert-message p {
+    margin-bottom: inherit;
+}
+
+.alert-message p:last-child {
+	margin-bottom: 0;
+}
+
+.alert-message {
+    display: none;
+	margin-top: 1em;
 }
