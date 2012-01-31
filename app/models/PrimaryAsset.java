@@ -13,13 +13,13 @@ public class PrimaryAsset extends Model {
     
     @OneToOne public RiskScope scope;
     public String name;
-    @Enumerated(EnumType.STRING) public Type type;
+    @Enumerated(EnumType.ORDINAL) public Type type;
     
-    public static PrimaryAsset create(RiskScope scope,String name) {
+    public static PrimaryAsset create(RiskScope scope,String name,Type type) {
         PrimaryAsset asset = new PrimaryAsset();
         asset.scope = scope;
         asset.name = name;
-        asset.type = Type.INFO;
+        asset.type = type;
         return asset.save();
     }
 }

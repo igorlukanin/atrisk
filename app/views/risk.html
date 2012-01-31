@@ -3,17 +3,17 @@
 <div class='container menu'>
 	<div class='row'>
 		<div class='span4'>
-			<h1 class='logo'>&{'project.name'}</h1>
+			<span class='logo'>&{'project.name'}</span>
 		</div>
-		<div class='span12 right'>
+		<div class='span12'>
 			<ul class='pills'>
-				<li#{if 'acceptance' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.acceptance()}'>&{'menu.acceptance'}</a></li>
-				<li#{if 'treatment' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.treatment()}'>&{'menu.treatment'}</a></li>
-				<li#{if 'evaluation' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.evaluation()}'>&{'menu.evaluation'}</a></li>
-				<li#{if 'analysis' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.analysis()}'>&{'menu.analysis'}</a></li>
-				<li#{if 'id' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.id()}'>&{'menu.id'}</a></li>
-				<li#{if 'context' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.context()}'>&{'menu.context'}</a></li>
 				<li#{if 'main' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.main()}'>&{'menu.main'}</a></li>
+				<li#{if 'context' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.context()}'>&{'menu.context'}</a></li>
+				<li#{if 'id' == request.actionMethod || 'idAsset' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.id()}'>&{'menu.id'}</a></li>
+				<li#{if 'analysis' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.analysis()}'>&{'menu.analysis'}</a></li>
+				<li#{if 'evaluation' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.evaluation()}'>&{'menu.evaluation'}</a></li>
+				<li#{if 'treatment' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.treatment()}'>&{'menu.treatment'}</a></li>
+				<li#{if 'acceptance' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.acceptance()}'>&{'menu.acceptance'}</a></li>
 			</ul>
 		</div>
 	</div>
@@ -25,18 +25,6 @@
 
 <div class='container'>
 	<div class='row'>
-		<div class='span12'>
-			<a id='action-enable-notes' href='#'>&{'action.enable-notes'}</a>&nbsp;
-		</div>
-		<div class='span4 right'><a class='btn' href='@{HomeController.logout}'>&{'action.logout'}</a></div>
+		<div class='span16'><a class='btn' href='@{HomeController.logout}'>&{'action.logout'}</a></div>
 	</div>
 </div>
-
-<script type="text/javascript">
-	$(function() {
-		$("#action-enable-notes").click(function() {
-			$(this).hide();
-			$(".alert-message").show();
-		});
-	});
-</script>

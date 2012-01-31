@@ -4,13 +4,15 @@ import models.*;
 import play.data.validation.*;
 import play.mvc.*;
 
-import java.util.*;
-
 public class RiskController extends Controller {
     @Before
     private static void checkAuthentication() {
         if (null == session.get("user")) {
             redirect("HomeController.root");
+        }
+        
+        if (null == RiskScope.findBySession(session)) {
+            redirect("HomeController.logout");
         }
 
         renderArgs.put("user",User.findBySession(session));
@@ -23,60 +25,7 @@ public class RiskController extends Controller {
 
     public static void context() {
         RiskScope scope = RiskScope.findBySession(session);
-        List<RiskCriterion> criteria = RiskCriterion.find("order by name").fetch();
-        render(scope,criteria);
-    }
-    
-    public static void addCriterion(String name) {
-        validation.required(name);
-
-        if (Validation.hasErrors()) {
-            params.flash();
-            Validation.keep();
-        }
-        else {
-            RiskCriterion.create(RiskScope.findBySession(session),name);
-        }
-
-        context();
-    }
-
-    public static void deleteCriterion(long id) {
-        RiskCriterion.delete("id = ?",id);
-        context();
-    }
-
-    public static void setCriterionEvaluation(long id,boolean value) {
-        RiskCriterion criterion = RiskCriterion.findById(id);
-
-        if (null != criterion) {
-            criterion.evaluation = value;
-            criterion.save();
-        }
-
-        context();
-    }
-
-    public static void setCriterionImpact(long id,boolean value) {
-        RiskCriterion criterion = RiskCriterion.findById(id);
-
-        if (null != criterion) {
-            criterion.impact = value;
-            criterion.save();
-        }
-
-        context();
-    }
-
-    public static void setCriterionAcceptance(long id,boolean value) {
-        RiskCriterion criterion = RiskCriterion.findById(id);
-
-        if (null != criterion) {
-            criterion.acceptance = value;
-            criterion.save();
-        }
-
-        context();
+        render(scope);
     }
 
     public static void setScope(String name,String boundaries) {
@@ -103,23 +52,36 @@ public class RiskController extends Controller {
     }
 
     public static void id() {
-        List<PrimaryAsset> primaryAssets = PrimaryAsset.find("order by type desc, name").fetch();
-        List<SupportingAsset> supportingAssets = SupportingAsset.find("order by type desc, name").fetch();
-
-        render(primaryAssets,supportingAssets);
+        idAsset();
     }
 
-    public static void addPrimaryAsset(String name) {
+    public static void idAsset() {
+        renderArgs.put("primaryInfoAssets",PrimaryAsset.find("type = ? order by name",PrimaryAsset.Type.INFO).fetch());
+        renderArgs.put("primaryProcessAssets",PrimaryAsset.find("type = ? order by name",PrimaryAsset.Type.PROCESS).fetch());
+        renderArgs.put("supportingAssets",SupportingAsset.find("order by name").fetch());
+        renderArgs.put("supportingHardwareAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.HARDWARE).fetch());
+        renderArgs.put("supportingSoftwareAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.SOFTWARE).fetch());
+        renderArgs.put("supportingNetworkAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.NETWORK).fetch());
+        renderArgs.put("supportingPersonnelAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.PERSONNEL).fetch());
+        renderArgs.put("supportingSiteAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.SITE).fetch());
+        renderArgs.put("supportingOrganizationAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.ORGANIZATION).fetch());
+
+        render();
+    }
+
+    public static void addPrimaryAsset(String name,String type) {
         validation.required(name);
+        validation.required(type);
 
-        if (Validation.hasErrors()) {
-            params.flash();
-            Validation.keep();
+        if (! Validation.hasErrors()) {
+            for (PrimaryAsset.Type t : PrimaryAsset.Type.values()) {
+                if (type.equals(t.toString())) {
+                    PrimaryAsset.create(RiskScope.findBySession(session),name,t);
+                    id();
+                }
+            }
         }
-        else {
-            PrimaryAsset.create(RiskScope.findBySession(session),name);
-        }
-
+        
         id();
     }
 
@@ -128,37 +90,17 @@ public class RiskController extends Controller {
         id();
     }
 
-    public static void setPrimaryAssetTypeInfo(long id) {
-        PrimaryAsset asset = PrimaryAsset.findById(id);
-
-        if (null != asset) {
-            asset.type = PrimaryAsset.Type.INFO;
-            asset.save();
-        }
-
-        id();
-    }
-
-    public static void setPrimaryAssetTypeProcess(long id) {
-        PrimaryAsset asset = PrimaryAsset.findById(id);
-
-        if (null != asset) {
-            asset.type = PrimaryAsset.Type.PROCESS;
-            asset.save();
-        }
-
-        id();
-    }
-
-    public static void addSupportingAsset(String name) {
+    public static void addSupportingAsset(String name,String type) {
         validation.required(name);
+        validation.required(type);
 
-        if (Validation.hasErrors()) {
-            params.flash();
-            Validation.keep();
-        }
-        else {
-            SupportingAsset.create(RiskScope.findBySession(session),name);
+        if (! Validation.hasErrors()) {
+            for (SupportingAsset.Type t : SupportingAsset.Type.values()) {
+                if (type.equals(t.toString())) {
+                    SupportingAsset.create(RiskScope.findBySession(session),name,t);
+                    id();
+                }
+            }
         }
 
         id();
@@ -169,66 +111,22 @@ public class RiskController extends Controller {
         id();
     }
 
-    public static void setSupportingAssetTypeHardware(long id) {
-        SupportingAsset asset = SupportingAsset.findById(id);
+    public static void bindToPrimaryAsset(long assetId,long[] primaryAssetId) {
+        SupportingAsset asset = SupportingAsset.findById(assetId);
 
         if (null != asset) {
-            asset.type = SupportingAsset.Type.HARDWARE;
-            asset.save();
-        }
+            asset.primaryAssets.clear();
 
-        id();
-    }
+            if (null != primaryAssetId) {
+                for (Long primaryId : primaryAssetId) {
+                    PrimaryAsset primaryAsset = PrimaryAsset.findById(primaryId);
 
-    public static void setSupportingAssetTypeSoftware(long id) {
-        SupportingAsset asset = SupportingAsset.findById(id);
+                    if (null != primaryAsset) {
+                        asset.primaryAssets.add(primaryAsset);
+                    }
+                }
+            }
 
-        if (null != asset) {
-            asset.type = SupportingAsset.Type.SOFTWARE;
-            asset.save();
-        }
-
-        id();
-    }
-
-    public static void setSupportingAssetTypeNetwork(long id) {
-        SupportingAsset asset = SupportingAsset.findById(id);
-
-        if (null != asset) {
-            asset.type = SupportingAsset.Type.NETWORK;
-            asset.save();
-        }
-
-        id();
-    }
-
-    public static void setSupportingAssetTypePersonnel(long id) {
-        SupportingAsset asset = SupportingAsset.findById(id);
-
-        if (null != asset) {
-            asset.type = SupportingAsset.Type.PERSONNEL;
-            asset.save();
-        }
-
-        id();
-    }
-
-    public static void setSupportingAssetTypeSite(long id) {
-        SupportingAsset asset = SupportingAsset.findById(id);
-
-        if (null != asset) {
-            asset.type = SupportingAsset.Type.SITE;
-            asset.save();
-        }
-
-        id();
-    }
-
-    public static void setSupportingAssetTypeOrganization(long id) {
-        SupportingAsset asset = SupportingAsset.findById(id);
-
-        if (null != asset) {
-            asset.type = SupportingAsset.Type.ORGANIZATION;
             asset.save();
         }
 

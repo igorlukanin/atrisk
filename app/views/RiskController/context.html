@@ -26,48 +26,7 @@
 				</div>
 				<div class="clearfix">
 					<label for="boundaries">&{'form.scope.boundaries'}</label>
-					<div class="input"><textarea enter-driven class="span6" id="boundaries" name="boundaries" rows="5">${scope.boundaries}</textarea></div>
-				</div>
-			#{/form}
-		</div>
-	</div>
-	<div class='row'>
-		<div class='span16'>
-			<h1>&{'page.context.criteria.title'}</h1>
-
-			<table class='condensed-table'>
-				<tbody>
-					#{list items:criteria, as:'criterion'}
-					<tr>
-						<td width='50%'>${criterion.name}</td>
-						<td>
-							#{if criterion.evaluation}<a href='@{RiskController.setCriterionEvaluation(criterion.id,false)}'>&{'form.criteria.evaluation'}</a>#{/if}
-							#{else}<a class='disabled' href='@{RiskController.setCriterionEvaluation(criterion.id,true)}'>&{'form.criteria.evaluation'}</a>#{/else}
-						</td>
-						<td>
-							#{if criterion.impact}<a href='@{RiskController.setCriterionImpact(criterion.id,false)}'>&{'form.criteria.impact'}</a>#{/if}
-							#{else}<a class='disabled' href='@{RiskController.setCriterionImpact(criterion.id,true)}'>&{'form.criteria.impact'}</a>#{/else}
-						</td>
-						<td>
-							#{if criterion.acceptance}<a href='@{RiskController.setCriterionAcceptance(criterion.id,false)}'>&{'form.criteria.acceptance'}</a>#{/if}
-							#{else}<a class='disabled' href='@{RiskController.setCriterionAcceptance(criterion.id,true)}'>&{'form.criteria.acceptance'}</a>#{/else}
-						</td>
-						<td><a class='danger' href='@{RiskController.deleteCriterion(criterion.id)}'>&{'form.delete'}</a></td>
-					</tr>
-					#{/list}
-				</tbody>
-			</table>
-
-			*{<ul class='inputs-list'>}*
-				*{#{list items:criterionGroups, as:'group'}}*
-					*{<li><label><input type='checkbox' value=''/><span>${group.name}</span></label></li>}*
-				*{<li>${group.name} <a class='important hover' href='@{RiskController.deleteCriterionGroup(group.id)}'>&{'form.common.hint.delete'}</a></li>}*
-				*{#{/list}}*
-			*{</ul>}*
-
-			#{form @RiskController.addCriterion()}
-				<div class='clearfix#{ifError 'name'} error#{/ifError}'>
-					<input class='span8' name='name' type='text' value='${flash.name}' title='&{'form.criteria.criterion'}'/>
+					<div class="input"><textarea enter-driven class="span13" id="boundaries" name="boundaries" rows="5">${scope.boundaries}</textarea></div>
 				</div>
 			#{/form}
 		</div>

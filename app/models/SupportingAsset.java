@@ -3,6 +3,7 @@ package models;
 import play.db.jpa.*;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 public class SupportingAsset extends Model {
@@ -17,13 +18,15 @@ public class SupportingAsset extends Model {
     
     @OneToOne public RiskScope scope;
     public String name;
-    @Enumerated(EnumType.STRING) public Type type;
+    @Enumerated(EnumType.ORDINAL) public Type type;
+    @ManyToMany public List<PrimaryAsset> primaryAssets;
     
-    public static SupportingAsset create(RiskScope scope,String name) {
+    public static SupportingAsset create(RiskScope scope,String name,Type type) {
         SupportingAsset asset = new SupportingAsset();
         asset.scope = scope;
         asset.name = name;
-        asset.type = Type.HARDWARE;
+        asset.type = type;
+        asset.primaryAssets = new ArrayList<PrimaryAsset>();
         return asset.save();
     }
 }

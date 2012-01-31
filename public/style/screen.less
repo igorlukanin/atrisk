@@ -1,5 +1,5 @@
 /* Variables */
-@dangerColor:   #c43c35;
+@selectedColor:   #eeeeee;
 @disabledColor: #cccccc;
 
 /* Open Sans font */
@@ -17,21 +17,13 @@
     src: local('Open Sans Light'), local('OpenSans-Light'), url('opensans/Open Sans Light.woff') format('woff');
 }
 
-a.danger {
-	color: @dangerColor;
-}
-
-a.disabled {
-	color: @disabledColor;
-}
-
 body, label, input, select, textarea, .btn .close, .alert-message .close {
     font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
 }
 
 body {
-	margin: 3em 0 5em 0;
+	margin: 5em 0 5em 0;
 }
 
 h1 {
@@ -40,29 +32,26 @@ h1 {
 }
 
 h2 {
-    font-size: 1.5em;
+    font-size: 1.6em;
 	font-weight: 300;
+}
+
+h1, h2 {
+	margin-top: .5em;
+	margin-bottom: .25em;
 }
 
 div.top-shift {
 	margin-top: 15em;
 }
 
-h1.logo {
+div.menu {
+	margin-bottom: 1em;
+}
+
+span.logo {
 	font-size: 4em;
 	font-weight: 300;
-}
-
-div.row {
-	margin-top: 2em;
-}
-
-div.row div.right * {
-	float: right;
-}
-
-div.row div.right ul {
-    margin-top: .2em;
 }
 
 table td {
@@ -98,15 +87,14 @@ form .text-input {
 	line-height: inherit;
 }
 
-.alert-message p {
-    margin-bottom: inherit;
+.btn.small {
+	padding: 2px 6px;
 }
 
-.alert-message p:last-child {
-	margin-bottom: 0;
+.modal {
+	top: 280px;
 }
 
-.alert-message {
-    display: none;
-	margin-top: 1em;
+.modal-body {
+	margin-left: 1em;
 }

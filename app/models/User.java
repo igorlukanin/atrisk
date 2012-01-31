@@ -19,7 +19,7 @@ public class User extends Model {
         User user = new User();
         user.username = username;
         user.passwordHash = getPasswordHash(password);
-        user.scopes.add(RiskScope.create(Messages.get("model.scope.name")));
+        user.scopes.add(RiskScope.create(Messages.get("model.risk-scope.name")));
         return user.save();
     }
     
