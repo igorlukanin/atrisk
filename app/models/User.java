@@ -13,7 +13,7 @@ import java.util.*;
 public class User extends Model {
     public String username;
     public String passwordHash;
-    @ManyToMany public List<RiskScope> scopes = new ArrayList<RiskScope>();
+    @ManyToMany(cascade = CascadeType.ALL) public List<RiskScope> scopes = new ArrayList<RiskScope>();
     
     public static User create(String username,String password) {
         User user = new User();

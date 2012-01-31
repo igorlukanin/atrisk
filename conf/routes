@@ -23,7 +23,13 @@ POST /id/asset/supporting/bind                      RiskController.bindToPrimary
 GET  /id/threat                                     RiskController.idThreat
 POST /id/threat/add                                 RiskController.addThreat
 GET  /id/threat/{id}/delete                         RiskController.deleteThreat
-POST /id/threat/bind                                RiskController.bindToAsset
+POST /id/threat/bind                                RiskController.bindThreatToAsset
+GET  /id/control                                    RiskController.idControl
+POST /id/control/add                                RiskController.addControl
+GET  /id/control/{id}/delete                        RiskController.deleteControl
+POST /id/control/bind                               RiskController.bindControlToAsset
+POST /id/control/info                               RiskController.setControlInfo
+GET  /id/impact                                     RiskController.idImpact
 GET  /analysis                                      RiskController.analysis
 GET  /evaluation                                    RiskController.evaluation
 GET  /treatment                                     RiskController.treatment

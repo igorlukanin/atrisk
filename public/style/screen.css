@@ -1,7 +1,3 @@
-/* Variables */
-@selectedColor:   #eeeeee;
-@disabledColor: #cccccc;
-
 /* Open Sans font */
 @font-face {
 	font-family: 'Open Sans';
@@ -45,10 +41,6 @@ div.top-shift {
 	margin-top: 15em;
 }
 
-div.menu {
-	margin-bottom: 1em;
-}
-
 span.logo {
 	font-size: 4em;
 	font-weight: 300;
@@ -84,7 +76,7 @@ form .input {
 }
 
 form .text-input {
-	padding: 0px;
+	padding: 0;
 	line-height: inherit;
 }
 
@@ -99,4 +91,12 @@ form .text-input {
 
 .modal-body {
 	margin-left: 1em;
+}
+
+span.unexistent {
+	color: #999999;
+}
+
+span.useless {
+	text-decoration: line-through;
 }

@@ -4,6 +4,8 @@ import models.*;
 import play.data.validation.*;
 import play.mvc.*;
 
+import java.util.*;
+
 public class RiskController extends Controller {
     @Before
     private static void checkAuthentication() {
@@ -86,7 +88,12 @@ public class RiskController extends Controller {
     }
 
     public static void deletePrimaryAsset(long id) {
-        PrimaryAsset.delete("id = ?",id);
+        PrimaryAsset asset = PrimaryAsset.findById(id);
+
+        if (null != asset) {
+            asset.delete();
+        }
+
         idAsset();
     }
 
@@ -107,7 +114,12 @@ public class RiskController extends Controller {
     }
 
     public static void deleteSupportingAsset(long id) {
-        SupportingAsset.delete("id = ?",id);
+        SupportingAsset asset = SupportingAsset.findById(id);
+
+        if (null != asset) {
+            asset.delete();
+        }
+
         idAsset();
     }
 
@@ -167,11 +179,16 @@ public class RiskController extends Controller {
     }
 
     public static void deleteThreat(long id) {
-        Threat.delete("id = ?",id);
+        Threat threat = Threat.findById(id);
+
+        if (null != threat) {
+            threat.delete();
+        }
+
         idThreat();
     }
 
-    public static void bindToAsset(long threatId,long[] assetId) {
+    public static void bindThreatToAsset(long threatId,long[] assetId) {
         Threat threat = Threat.findById(threatId);
 
         if (null != threat) {
@@ -183,6 +200,7 @@ public class RiskController extends Controller {
 
                     if (null != asset) {
                         threat.assets.add(asset);
+                        Impact.create(RiskScope.findBySession(session),asset,threat);
                     }
                 }
             }
@@ -191,6 +209,89 @@ public class RiskController extends Controller {
         }
 
         idThreat();
+    }
+
+    public static void idControl() {
+        renderArgs.put("controls",Control.find("order by name").fetch());
+        renderArgs.put("inControls",Control.find("type = ? order by name",Control.Type.INFRASTRUCTURE).fetch());
+        renderArgs.put("orControls",Control.find("type = ? order by name",Control.Type.ORGANIZATION).fetch());
+        renderArgs.put("peControls",Control.find("type = ? order by name",Control.Type.PERSONNEL).fetch());
+        renderArgs.put("hsControls",Control.find("type = ? order by name",Control.Type.HARDWARE_SOFTWARE).fetch());
+        renderArgs.put("coControls",Control.find("type = ? order by name",Control.Type.COMMUNICATIONS).fetch());
+        renderArgs.put("cyControls",Control.find("type = ? order by name",Control.Type.CONTINGENCY).fetch());
+        renderArgs.put("supportingHardwareAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.HARDWARE).fetch());
+        renderArgs.put("supportingSoftwareAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.SOFTWARE).fetch());
+        renderArgs.put("supportingNetworkAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.NETWORK).fetch());
+        renderArgs.put("supportingPersonnelAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.PERSONNEL).fetch());
+        renderArgs.put("supportingSiteAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.SITE).fetch());
+        renderArgs.put("supportingOrganizationAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.ORGANIZATION).fetch());
+
+        render();
+    }
+
+    public static void addControl(String name,String type) {
+        validation.required(name);
+        validation.required(type);
+
+        if (! Validation.hasErrors()) {
+            for (Control.Type t : Control.Type.values()) {
+                if (type.equals(t.toString())) {
+                    Control.create(RiskScope.findBySession(session),name,t);
+                    idControl();
+                }
+            }
+        }
+
+        idControl();
+    }
+
+    public static void deleteControl(long id) {
+        Control control = Control.findById(id);
+
+        if (null != control) {
+            control.delete();
+        }
+
+        idControl();
+    }
+
+    public static void bindControlToAsset(long controlId,long[] assetId) {
+        Control control = Control.findById(controlId);
+
+        if (null != control) {
+            control.assets.clear();
+
+            if (null != assetId) {
+                for (Long anId : assetId) {
+                    SupportingAsset asset = SupportingAsset.findById(anId);
+
+                    if (null != asset) {
+                        control.assets.add(asset);
+                    }
+                }
+            }
+
+            control.save();
+        }
+
+        idControl();
+    }
+
+    public static void setControlInfo(long controlId) {
+        Control control = Control.findById(controlId);
+
+        if (null != control) {
+            control.implemented = null != params.get("implemented");
+            control.effective = null != params.get("effective");
+            control.save();
+        }
+
+        idControl();
+    }
+
+    public static void idImpact() {
+        List<Impact> impacts = Impact.find("order by asset.name, threat.name").fetch();
+        render(impacts);
     }
 
     public static void analysis() {

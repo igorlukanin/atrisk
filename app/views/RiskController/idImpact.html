@@ -1,0 +1,6 @@
+#{extends 'RiskController/id.html'/}
+#{set title:messages.get('project.name')/}
+
+#{list items:impacts, as:'impact'}
+	<p>${impact.getAsset().name} - ${impact.getThreat().name}</p>
+#{/list}

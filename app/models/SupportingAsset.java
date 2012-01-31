@@ -16,11 +16,14 @@ public class SupportingAsset extends Model {
         ORGANIZATION
     }
     
-    @OneToOne public RiskScope scope;
+    @ManyToOne public RiskScope scope;
     public String name;
     @Enumerated(EnumType.ORDINAL) public Type type;
-    @ManyToMany public List<PrimaryAsset> primaryAssets;
+    @ManyToMany(cascade = CascadeType.ALL) public List<PrimaryAsset> primaryAssets;
     
+    @OneToMany(cascade = CascadeType.ALL) List<Impact> impacts;
+    @ManyToMany(cascade = CascadeType.ALL) List<Threat> threats;
+
     public static SupportingAsset create(RiskScope scope,String name,Type type) {
         SupportingAsset asset = new SupportingAsset();
         asset.scope = scope;

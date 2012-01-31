@@ -11,7 +11,7 @@ public class PrimaryAsset extends Model {
         PROCESS
     }
     
-    @OneToOne public RiskScope scope;
+    @ManyToOne public RiskScope scope;
     public String name;
     @Enumerated(EnumType.ORDINAL) public Type type;
     

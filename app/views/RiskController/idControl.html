@@ -1,0 +1,386 @@
+#{extends 'RiskController/id.html'/}
+#{set title:messages.get('project.name')/}
+
+<div class='container'>
+	<div class='row'>
+		<div class='span8'><h2>&{'page.id.control.in'}</h2></div>
+		<div class='span8'><h2>&{'page.id.control.or'}</h2></div>
+	</div>
+	<div class='row'>
+		<div class='span8'>
+			<table class='condensed-table'>
+				<tbody>
+				#{list items:inControls, as:'control'}
+				<tr>
+					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
+					<td class='tail'>
+						<a control-id='${control.id}' class='select-additional-info btn small'>&{'page.id.control.link.info'}</a>
+						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
+						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{'page.id.control.nothing'}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+		<div class='span8'>
+			<table class='condensed-table'>
+				<tbody>
+				#{list items:orControls, as:'control'}
+				<tr>
+					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
+					<td class='tail'>
+						<a control-id='${control.id}' class='select-additional-info btn small'>&{'page.id.control.link.info'}</a>
+						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
+						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{'page.id.control.nothing'}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='span8'>
+		#{form @RiskController.addControl()}
+			<input name='type' type='hidden' value='${models.Control.Type.INFRASTRUCTURE}'/>
+			<div class='clearfix'>
+				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			</div>
+		#{/form}
+		</div>
+		<div class='span8'>
+		#{form @RiskController.addControl()}
+			<input name='type' type='hidden' value='${models.Control.Type.ORGANIZATION}'/>
+			<div class='clearfix'>
+				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			</div>
+		#{/form}
+		</div>
+	</div>
+</div>
+
+<div class='container'>
+	<div class='row'>
+		<div class='span8'><h2>&{'page.id.control.pe'}</h2></div>
+		<div class='span8'><h2>&{'page.id.control.hs'}</h2></div>
+	</div>
+	<div class='row'>
+		<div class='span8'>
+			<table class='condensed-table'>
+				<tbody>
+				#{list items:peControls, as:'control'}
+				<tr>
+					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
+					<td class='tail'>
+						<a control-id='${control.id}' class='select-additional-info btn small'>&{'page.id.control.link.info'}</a>
+						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
+						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{'page.id.control.nothing'}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+		<div class='span8'>
+			<table class='condensed-table'>
+				<tbody>
+				#{list items:hsControls, as:'control'}
+				<tr>
+					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
+					<td class='tail'>
+						<a control-id='${control.id}' class='select-additional-info btn small'>&{'page.id.control.link.info'}</a>
+						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
+						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{'page.id.control.nothing'}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='span8'>
+		#{form @RiskController.addControl()}
+			<input name='type' type='hidden' value='${models.Control.Type.PERSONNEL}'/>
+			<div class='clearfix'>
+				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			</div>
+		#{/form}
+		</div>
+		<div class='span8'>
+		#{form @RiskController.addControl()}
+			<input name='type' type='hidden' value='${models.Control.Type.HARDWARE_SOFTWARE}'/>
+			<div class='clearfix'>
+				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			</div>
+		#{/form}
+		</div>
+	</div>
+</div>
+
+<div class='container'>
+	<div class='row'>
+		<div class='span8'><h2>&{'page.id.control.co'}</h2></div>
+		<div class='span8'><h2>&{'page.id.control.cy'}</h2></div>
+	</div>
+	<div class='row'>
+		<div class='span8'>
+			<table class='condensed-table'>
+				<tbody>
+				#{list items:coControls, as:'control'}
+				<tr>
+					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
+					<td class='tail'>
+						<a control-id='${control.id}' class='select-additional-info btn small'>&{'page.id.control.link.info'}</a>
+						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
+						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{'page.id.control.nothing'}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+		<div class='span8'>
+			<table class='condensed-table'>
+				<tbody>
+				#{list items:cyControls, as:'control'}
+				<tr>
+					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
+					<td class='tail'>
+						<a control-id='${control.id}' class='select-additional-info btn small'>&{'page.id.control.link.info'}</a>
+						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
+						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{'page.id.control.nothing'}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='span8'>
+		#{form @RiskController.addControl()}
+			<input name='type' type='hidden' value='${models.Control.Type.COMMUNICATIONS}'/>
+			<div class='clearfix'>
+				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			</div>
+		#{/form}
+		</div>
+		<div class='span8'>
+		#{form @RiskController.addControl()}
+			<input name='type' type='hidden' value='${models.Control.Type.CONTINGENCY}'/>
+			<div class='clearfix'>
+				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			</div>
+		#{/form}
+		</div>
+	</div>
+</div>
+
+<div id='control-modal-info' class='modal hide'>
+	<div class="modal-body">
+		#{form @RiskController.setControlInfo()}
+		<input type="hidden" name="controlId"/>
+
+		<h2></h2>
+
+		<ul class="inputs-list">
+			<li>
+				<label>
+					<input type="checkbox" name="implemented"/>
+					<span>&{'page.id.control.implemented'}</span>
+				</label>
+			</li>
+			<li>
+				<label>
+					<input type="checkbox" name="effective"/>
+					<span>&{'page.id.control.effective'}</span>
+				</label>
+			</li>
+		</ul>
+		#{/form}
+	</div>
+	<div class='modal-footer'>
+		<a href='#' class='btn primary'>&{'form.save'}</a>
+		<a href='#' class='btn secondary'>&{'form.cancel'}</a>
+	</div>
+</div>
+
+<div id='control-modal' class='modal hide'>
+	<div class="modal-body">
+		#{form @RiskController.bindControlToAsset()}
+		<input type="hidden" name="controlId"/>
+
+		<h2>&{'page.id.asset.supporting.hardware'}</h2>
+
+		<ul class="inputs-list">
+		#{list items:supportingHardwareAssets, as:'asset'}
+			<li>
+				<label>
+					<input type="checkbox" name="assetId[]" value='${asset.id}'/>
+					<span>${asset.name}</span>
+				</label>
+			</li>
+		#{/list}
+		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		</ul>
+
+		<h2>&{'page.id.asset.supporting.software'}</h2>
+
+		<ul class="inputs-list">
+		#{list items:supportingSoftwareAssets, as:'asset'}
+			<li>
+				<label>
+					<input type="checkbox" name="assetId[]" value='${asset.id}'/>
+					<span>${asset.name}</span>
+				</label>
+			</li>
+		#{/list}
+		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		</ul>
+
+		<h2>&{'page.id.asset.supporting.network'}</h2>
+
+		<ul class="inputs-list">
+		#{list items:supportingNetworkAssets, as:'asset'}
+			<li>
+				<label>
+					<input type="checkbox" name="assetId[]" value='${asset.id}'/>
+					<span>${asset.name}</span>
+				</label>
+			</li>
+		#{/list}
+		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		</ul>
+
+		<h2>&{'page.id.asset.supporting.personnel'}</h2>
+
+		<ul class="inputs-list">
+		#{list items:supportingPersonnelAssets, as:'asset'}
+			<li>
+				<label>
+					<input type="checkbox" name="assetId[]" value='${asset.id}'/>
+					<span>${asset.name}</span>
+				</label>
+			</li>
+		#{/list}
+		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		</ul>
+
+		<h2>&{'page.id.asset.supporting.site'}</h2>
+
+		<ul class="inputs-list">
+		#{list items:supportingSiteAssets, as:'asset'}
+			<li>
+				<label>
+					<input type="checkbox" name="assetId[]" value='${asset.id}'/>
+					<span>${asset.name}</span>
+				</label>
+			</li>
+		#{/list}
+		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		</ul>
+
+		<h2>&{'page.id.asset.supporting.organization'}</h2>
+
+		<ul class="inputs-list">
+		#{list items:supportingOrganizationAssets, as:'asset'}
+			<li>
+				<label>
+					<input type="checkbox" name="assetId[]" value='${asset.id}'/>
+					<span>${asset.name}</span>
+				</label>
+			</li>
+		#{/list}
+		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		</ul>
+
+		#{/form}
+	</div>
+	<div class='modal-footer'>
+		<a href='#' class='btn primary'>&{'form.save'}</a>
+		<a href='#' class='btn secondary'>&{'form.cancel'}</a>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		var id = 0;
+
+		$('.modal').modal({keyboard:true,backdrop:true});
+
+		$('.select-additional-info').click(function() {
+			id = $(this).attr("control-id");
+			$('#control-modal-info').modal('show');
+		});
+
+		$('.select-primary-control').click(function() {
+			id = $(this).attr("control-id");
+			$('#control-modal').modal('show');
+		});
+
+		$("#control-modal-info").bind("show",function() {
+			var values = {
+			#{list items:controls, as:'control'}
+				'${control.id}' : ['${control.name}',${control.implemented},${control.effective}],
+			#{/list}
+			};
+
+			$.each(values,function(i,value) {
+				if (i == id) {
+					$("#control-modal-info h2").text(value[0]);
+					$("#control-modal-info input[name='controlId']").attr("value",id);
+
+					var imBox = $("#control-modal-info input[name='implemented']");
+					if (value[1]) {imBox.attr("checked","true");} else {imBox.removeAttr("checked");}
+
+					var efBox = $("#control-modal-info input[name='effective']");
+					if (value[2]) {efBox.attr("checked","true");} else {efBox.removeAttr("checked");}
+				}
+			});
+		});
+
+		$("#control-modal").bind("show",function() {
+			var values = {
+			#{list items:controls, as:'control'}
+				'${control.id}' : [#{list items:control.assets, as:'asset'}${asset.id},#{/list}],
+			#{/list}
+			};
+
+			$("#control-modal input[type='checkbox']").removeAttr("checked");
+
+			$.each(values,function(i,value) {
+				if (i == id) {
+					$("#control-modal input[name='controlId']").attr("value",id);
+
+					$.each(value,function(j,v) {
+						$("#control-modal input[type='checkbox'][value='" + v + "']").attr("checked","true");
+					});
+				}
+			});
+		});
+
+		$("#control-modal-info a.primary").click(function() {
+			$("#control-modal-info form").submit();
+		});
+
+		$("#control-modal-info a.secondary").click(function() {
+			$("#control-modal-info").modal("hide");
+		});
+
+		$("#control-modal a.primary").click(function() {
+			$("#control-modal form").submit();
+		});
+
+		$("#control-modal a.secondary").click(function() {
+			$("#control-modal").modal("hide");
+		});
+	});
+</script>
