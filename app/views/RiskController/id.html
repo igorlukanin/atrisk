@@ -6,6 +6,7 @@
 		<div class='offset4 span12'>
 			<ul class='pills'>
 				<li#{if 'idAsset' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.idAsset()}'>&{'menu.idAsset'}</a></li>
+				<li#{if 'idThreat' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.idThreat()}'>&{'menu.idThreat'}</a></li>
 			</ul>
 		</div>
 	</div>

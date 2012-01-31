@@ -9,7 +9,7 @@
 			<ul class='pills'>
 				<li#{if 'main' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.main()}'>&{'menu.main'}</a></li>
 				<li#{if 'context' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.context()}'>&{'menu.context'}</a></li>
-				<li#{if 'id' == request.actionMethod || 'idAsset' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.id()}'>&{'menu.id'}</a></li>
+				<li#{if 'id' == request.actionMethod || 'idAsset' == request.actionMethod || 'idThreat' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.id()}'>&{'menu.id'}</a></li>
 				<li#{if 'analysis' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.analysis()}'>&{'menu.analysis'}</a></li>
 				<li#{if 'evaluation' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.evaluation()}'>&{'menu.evaluation'}</a></li>
 				<li#{if 'treatment' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.treatment()}'>&{'menu.treatment'}</a></li>

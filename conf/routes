@@ -19,7 +19,11 @@ POST /id/asset/primary/add                          RiskController.addPrimaryAss
 GET  /id/asset/primary/{id}/delete                  RiskController.deletePrimaryAsset
 POST /id/asset/supporting/add                       RiskController.addSupportingAsset
 GET  /id/asset/supporting/{id}/delete               RiskController.deleteSupportingAsset
-POST  /id/asset/supporting/bind                     RiskController.bindToPrimaryAsset
+POST /id/asset/supporting/bind                      RiskController.bindToPrimaryAsset
+GET  /id/threat                                     RiskController.idThreat
+POST /id/threat/add                                 RiskController.addThreat
+GET  /id/threat/{id}/delete                         RiskController.deleteThreat
+POST /id/threat/bind                                RiskController.bindToAsset
 GET  /analysis                                      RiskController.analysis
 GET  /evaluation                                    RiskController.evaluation
 GET  /treatment                                     RiskController.treatment

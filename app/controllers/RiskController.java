@@ -81,13 +81,13 @@ public class RiskController extends Controller {
                 }
             }
         }
-        
-        id();
+
+        idAsset();
     }
 
     public static void deletePrimaryAsset(long id) {
         PrimaryAsset.delete("id = ?",id);
-        id();
+        idAsset();
     }
 
     public static void addSupportingAsset(String name,String type) {
@@ -103,12 +103,12 @@ public class RiskController extends Controller {
             }
         }
 
-        id();
+        idAsset();
     }
 
     public static void deleteSupportingAsset(long id) {
         SupportingAsset.delete("id = ?",id);
-        id();
+        idAsset();
     }
 
     public static void bindToPrimaryAsset(long assetId,long[] primaryAssetId) {
@@ -130,7 +130,67 @@ public class RiskController extends Controller {
             asset.save();
         }
 
-        id();
+        idAsset();
+    }
+
+    public static void idThreat() {
+        renderArgs.put("threats",Threat.find("order by name").fetch());
+        renderArgs.put("fmThreats",Threat.find("type = ? order by name",Threat.Type.FORCE_MAJEURE).fetch());
+        renderArgs.put("orThreats",Threat.find("type = ? order by name",Threat.Type.ORGANIZATION).fetch());
+        renderArgs.put("hfThreats",Threat.find("type = ? order by name",Threat.Type.HUMAN_FAILURE).fetch());
+        renderArgs.put("tfThreats",Threat.find("type = ? order by name",Threat.Type.TECHNICAL_FAILURE).fetch());
+        renderArgs.put("daThreats",Threat.find("type = ? order by name",Threat.Type.DELIBERATE_ACTS).fetch());
+        renderArgs.put("supportingHardwareAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.HARDWARE).fetch());
+        renderArgs.put("supportingSoftwareAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.SOFTWARE).fetch());
+        renderArgs.put("supportingNetworkAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.NETWORK).fetch());
+        renderArgs.put("supportingPersonnelAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.PERSONNEL).fetch());
+        renderArgs.put("supportingSiteAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.SITE).fetch());
+        renderArgs.put("supportingOrganizationAssets",SupportingAsset.find("type = ? order by name",SupportingAsset.Type.ORGANIZATION).fetch());
+
+        render();
+    }
+
+    public static void addThreat(String name,String type) {
+        validation.required(name);
+        validation.required(type);
+
+        if (! Validation.hasErrors()) {
+            for (Threat.Type t : Threat.Type.values()) {
+                if (type.equals(t.toString())) {
+                    Threat.create(RiskScope.findBySession(session),name,t);
+                    idThreat();
+                }
+            }
+        }
+
+        idThreat();
+    }
+
+    public static void deleteThreat(long id) {
+        Threat.delete("id = ?",id);
+        idThreat();
+    }
+
+    public static void bindToAsset(long threatId,long[] assetId) {
+        Threat threat = Threat.findById(threatId);
+
+        if (null != threat) {
+            threat.assets.clear();
+
+            if (null != assetId) {
+                for (Long anId : assetId) {
+                    SupportingAsset asset = SupportingAsset.findById(anId);
+
+                    if (null != asset) {
+                        threat.assets.add(asset);
+                    }
+                }
+            }
+
+            threat.save();
+        }
+
+        idThreat();
     }
 
     public static void analysis() {

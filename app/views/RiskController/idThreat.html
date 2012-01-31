@@ -1,0 +1,292 @@
+#{extends 'RiskController/id.html'/}
+#{set title:messages.get('project.name')/}
+
+<div class='container'>
+	<div class='row'>
+		<div class='span8'><h2>&{'page.id.threat.fm'}</h2></div>
+		<div class='span8'><h2>&{'page.id.threat.or'}</h2></div>
+	</div>
+	<div class='row'>
+		<div class='span8'>
+			<table class='condensed-table'>
+				<tbody>
+				#{list items:fmThreats, as:'threat'}
+				<tr>
+					<td>${threat.name}</td>
+					<td class='tail'>
+						<a threat-id='${threat.id}' class='select-primary-threat btn #{ifnot threat.assets.size()}primary#{/ifnot} small'>&{'page.id.threat.link.start'}</a>
+						<a class='btn small' href='@{RiskController.deleteThreat(threat.id)}'>&{'form.delete'}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{'page.id.threat.nothing'}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+		<div class='span8'>
+			<table class='condensed-table'>
+				<tbody>
+				#{list items:orThreats, as:'threat'}
+				<tr>
+					<td>${threat.name}</td>
+					<td class='tail'>
+						<a threat-id='${threat.id}' class='select-primary-threat btn #{ifnot threat.assets.size()}primary#{/ifnot} small'>&{'page.id.threat.link.start'}</a>
+						<a class='btn small' href='@{RiskController.deleteThreat(threat.id)}'>&{'form.delete'}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{'page.id.threat.nothing'}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='span8'>
+		#{form @RiskController.addThreat()}
+			<input name='type' type='hidden' value='${models.Threat.Type.FORCE_MAJEURE}'/>
+			<div class='clearfix'>
+				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			</div>
+		#{/form}
+		</div>
+		<div class='span8'>
+		#{form @RiskController.addThreat()}
+			<input name='type' type='hidden' value='${models.Threat.Type.ORGANIZATION}'/>
+			<div class='clearfix'>
+				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			</div>
+		#{/form}
+		</div>
+	</div>
+</div>
+
+<div class='container'>
+	<div class='row'>
+		<div class='span8'><h2>&{'page.id.threat.hf'}</h2></div>
+		<div class='span8'><h2>&{'page.id.threat.tf'}</h2></div>
+	</div>
+	<div class='row'>
+		<div class='span8'>
+			<table class='condensed-table'>
+				<tbody>
+				#{list items:hfThreats, as:'threat'}
+				<tr>
+					<td>${threat.name}</td>
+					<td class='tail'>
+						<a threat-id='${threat.id}' class='select-primary-threat btn #{ifnot threat.assets.size()}primary#{/ifnot} small'>&{'page.id.threat.link.start'}</a>
+						<a class='btn small' href='@{RiskController.deleteThreat(threat.id)}'>&{'form.delete'}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{'page.id.threat.nothing'}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+		<div class='span8'>
+			<table class='condensed-table'>
+				<tbody>
+				#{list items:tfThreats, as:'threat'}
+				<tr>
+					<td>${threat.name}</td>
+					<td class='tail'>
+						<a threat-id='${threat.id}' class='select-primary-threat btn #{ifnot threat.assets.size()}primary#{/ifnot} small'>&{'page.id.threat.link.start'}</a>
+						<a class='btn small' href='@{RiskController.deleteThreat(threat.id)}'>&{'form.delete'}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{'page.id.threat.nothing'}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='span8'>
+		#{form @RiskController.addThreat()}
+			<input name='type' type='hidden' value='${models.Threat.Type.HUMAN_FAILURE}'/>
+			<div class='clearfix'>
+				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			</div>
+		#{/form}
+		</div>
+		<div class='span8'>
+		#{form @RiskController.addThreat()}
+			<input name='type' type='hidden' value='${models.Threat.Type.TECHNICAL_FAILURE}'/>
+			<div class='clearfix'>
+				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			</div>
+		#{/form}
+		</div>
+	</div>
+</div>
+
+<div class='container'>
+	<div class='row'>
+		<div class='span8'><h2>&{'page.id.threat.da'}</h2></div>
+	</div>
+	<div class='row'>
+		<div class='span8'>
+			<table class='condensed-table'>
+				<tbody>
+				#{list items:daThreats, as:'threat'}
+				<tr>
+					<td>${threat.name}</td>
+					<td class='tail'>
+						<a threat-id='${threat.id}' class='select-primary-threat btn #{ifnot threat.assets.size()}primary#{/ifnot} small'>&{'page.id.threat.link.start'}</a>
+						<a class='btn small' href='@{RiskController.deleteThreat(threat.id)}'>&{'form.delete'}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{'page.id.threat.nothing'}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='span8'>
+		#{form @RiskController.addThreat()}
+			<input name='type' type='hidden' value='${models.Threat.Type.DELIBERATE_ACTS}'/>
+			<div class='clearfix'>
+				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			</div>
+		#{/form}
+		</div>
+	</div>
+</div>
+
+<div id='threat-modal' class='modal hide'>
+	<div class="modal-body">
+		#{form @RiskController.bindToAsset()}
+		<input type="hidden" name="threatId"/>
+
+		<h2>&{'page.id.asset.supporting.hardware'}</h2>
+
+		<ul class="inputs-list">
+		#{list items:supportingHardwareAssets, as:'asset'}
+			<li>
+				<label>
+					<input type="checkbox" name="assetId[]" value='${asset.id}'/>
+					<span>${asset.name}</span>
+				</label>
+			</li>
+		#{/list}
+		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		</ul>
+
+		<h2>&{'page.id.asset.supporting.software'}</h2>
+
+		<ul class="inputs-list">
+		#{list items:supportingSoftwareAssets, as:'asset'}
+			<li>
+				<label>
+					<input type="checkbox" name="assetId[]" value='${asset.id}'/>
+					<span>${asset.name}</span>
+				</label>
+			</li>
+		#{/list}
+		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		</ul>
+
+		<h2>&{'page.id.asset.supporting.network'}</h2>
+
+		<ul class="inputs-list">
+		#{list items:supportingNetworkAssets, as:'asset'}
+			<li>
+				<label>
+					<input type="checkbox" name="assetId[]" value='${asset.id}'/>
+					<span>${asset.name}</span>
+				</label>
+			</li>
+		#{/list}
+		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		</ul>
+
+		<h2>&{'page.id.asset.supporting.personnel'}</h2>
+
+		<ul class="inputs-list">
+		#{list items:supportingPersonnelAssets, as:'asset'}
+			<li>
+				<label>
+					<input type="checkbox" name="assetId[]" value='${asset.id}'/>
+					<span>${asset.name}</span>
+				</label>
+			</li>
+		#{/list}
+		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		</ul>
+
+		<h2>&{'page.id.asset.supporting.site'}</h2>
+
+		<ul class="inputs-list">
+		#{list items:supportingSiteAssets, as:'asset'}
+			<li>
+				<label>
+					<input type="checkbox" name="assetId[]" value='${asset.id}'/>
+					<span>${asset.name}</span>
+				</label>
+			</li>
+		#{/list}
+		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		</ul>
+
+		<h2>&{'page.id.asset.supporting.organization'}</h2>
+
+		<ul class="inputs-list">
+		#{list items:supportingOrganizationAssets, as:'asset'}
+			<li>
+				<label>
+					<input type="checkbox" name="assetId[]" value='${asset.id}'/>
+					<span>${asset.name}</span>
+				</label>
+			</li>
+		#{/list}
+		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		</ul>
+
+		#{/form}
+	</div>
+	<div class='modal-footer'>
+		<a href='#' class='btn primary'>&{'form.save'}</a>
+		<a href='#' class='btn secondary'>&{'form.cancel'}</a>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		var id = 0;
+
+		$('#threat-modal').modal({keyboard:true,backdrop:true});
+
+		$('.select-primary-threat').click(function() {
+			id = $(this).attr("threat-id");
+			$('#threat-modal').modal('show');
+		});
+
+		$("#threat-modal").bind("show",function() {
+			var values = {
+			#{list items:threats, as:'threat'}
+				'${threat.id}' : [#{list items:threat.assets, as:'asset'}${asset.id},#{/list}],
+			#{/list}
+			};
+
+			$("#threat-modal input[type='checkbox']").removeAttr("checked");
+
+			$.each(values,function(i,value) {
+				if (i == id) {
+					$("#threat-modal input[name='threatId']").attr("value",id);
+
+					$.each(value,function(j,v) {
+						$("#threat-modal input[type='checkbox'][value='" + v + "']").attr("checked","true");
+					});
+				}
+			});
+		});
+
+		$("#threat-modal a.primary").click(function() {
+			$("#threat-modal form").submit();
+		});
+
+		$("#threat-modal a.secondary").click(function() {
+			$("#threat-modal").modal("hide");
+		});
+	});
+</script>
