@@ -58,11 +58,7 @@ public class RiskController extends Controller {
         context();
     }
 
-    public static void id() {
-        idAsset();
-    }
-
-    public static void idAsset() {
+    public static void asset() {
         renderArgs.put("primaryInfoAssets",PrimaryAsset.find("type = ? order by name",PrimaryAsset.Type.INFO).fetch());
         renderArgs.put("primaryProcessAssets",PrimaryAsset.find("type = ? order by name",PrimaryAsset.Type.PROCESS).fetch());
         renderArgs.put("supportingAssets",SupportingAsset.find("order by name").fetch());
@@ -84,12 +80,12 @@ public class RiskController extends Controller {
             for (PrimaryAsset.Type t : PrimaryAsset.Type.values()) {
                 if (type.equals(t.toString())) {
                     PrimaryAsset.create(RiskScope.findBySession(session),name,t);
-                    id();
+                    asset();
                 }
             }
         }
 
-        idAsset();
+        asset();
     }
 
     public static void deletePrimaryAsset(long id) {
@@ -99,7 +95,7 @@ public class RiskController extends Controller {
             asset.delete();
         }
 
-        idAsset();
+        asset();
     }
 
     public static void addSupportingAsset(String name,String type) {
@@ -110,12 +106,12 @@ public class RiskController extends Controller {
             for (SupportingAsset.Type t : SupportingAsset.Type.values()) {
                 if (type.equals(t.toString())) {
                     SupportingAsset.create(RiskScope.findBySession(session),name,t);
-                    id();
+                    asset();
                 }
             }
         }
 
-        idAsset();
+        asset();
     }
 
     public static void deleteSupportingAsset(long id) {
@@ -125,7 +121,7 @@ public class RiskController extends Controller {
             asset.delete();
         }
 
-        idAsset();
+        asset();
     }
 
     public static void bindToPrimaryAsset(long assetId,long[] primaryAssetId) {
@@ -147,10 +143,10 @@ public class RiskController extends Controller {
             asset.save();
         }
 
-        idAsset();
+        asset();
     }
 
-    public static void idThreat() {
+    public static void threat() {
         renderArgs.put("threats",Threat.find("order by name").fetch());
         renderArgs.put("fmThreats",Threat.find("type = ? order by name",Threat.Type.FORCE_MAJEURE).fetch());
         renderArgs.put("orThreats",Threat.find("type = ? order by name",Threat.Type.ORGANIZATION).fetch());
@@ -175,12 +171,12 @@ public class RiskController extends Controller {
             for (Threat.Type t : Threat.Type.values()) {
                 if (type.equals(t.toString())) {
                     Threat.create(RiskScope.findBySession(session),name,t);
-                    idThreat();
+                    threat();
                 }
             }
         }
 
-        idThreat();
+        threat();
     }
 
     public static void deleteThreat(long id) {
@@ -190,7 +186,7 @@ public class RiskController extends Controller {
             threat.delete();
         }
 
-        idThreat();
+        threat();
     }
 
     public static void bindThreatToAsset(long threatId,long[] assetId) {
@@ -213,10 +209,10 @@ public class RiskController extends Controller {
             threat.save();
         }
 
-        idThreat();
+        threat();
     }
 
-    public static void idControl() {
+    public static void control() {
         renderArgs.put("controls",Control.find("order by name").fetch());
         renderArgs.put("inControls",Control.find("type = ? order by name",Control.Type.INFRASTRUCTURE).fetch());
         renderArgs.put("orControls",Control.find("type = ? order by name",Control.Type.ORGANIZATION).fetch());
@@ -242,12 +238,12 @@ public class RiskController extends Controller {
             for (Control.Type t : Control.Type.values()) {
                 if (type.equals(t.toString())) {
                     Control.create(RiskScope.findBySession(session),name,t);
-                    idControl();
+                    control();
                 }
             }
         }
 
-        idControl();
+        control();
     }
 
     public static void deleteControl(long id) {
@@ -257,7 +253,7 @@ public class RiskController extends Controller {
             control.delete();
         }
 
-        idControl();
+        control();
     }
 
     public static void bindControlToAsset(long controlId,long[] assetId) {
@@ -279,7 +275,7 @@ public class RiskController extends Controller {
             control.save();
         }
 
-        idControl();
+        control();
     }
 
     public static void setControlInfo(long controlId) {
@@ -291,39 +287,15 @@ public class RiskController extends Controller {
             control.save();
         }
 
-        idControl();
+        control();
     }
 
-    public static void idImpact() {
+    public static void impact() {
         List<Impact> impacts = Impact.find("order by asset.name, threat.name").fetch();
         render(impacts);
     }
 
-    public static void setImpactInfo(long impactId) {
-        Impact impact = Impact.findById(impactId);
-
-        if (null != impact) {
-//            control.implemented = null != params.get("implemented");
-//            control.effective = null != params.get("effective");
-//            control.save();
-        }
-
-        idControl();
-    }
-
-    public static void analysis() {
-        render();
-    }
-
-    public static void evaluation() {
-        render();
-    }
-
     public static void treatment() {
-        render();
-    }
-
-    public static void acceptance() {
         render();
     }
 }

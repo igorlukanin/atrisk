@@ -9,11 +9,11 @@
 			<ul class='pills'>
 				<li#{if 'main' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.main()}'>&{'menu.main'}</a></li>
 				<li#{if 'context' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.context()}'>&{'menu.context'}</a></li>
-				<li#{if 'id' == request.actionMethod || 'idAsset' == request.actionMethod || 'idThreat' == request.actionMethod || 'idControl' == request.actionMethod || 'idImpact' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.id()}'>&{'menu.id'}</a></li>
-				<li#{if 'analysis' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.analysis()}'>&{'menu.analysis'}</a></li>
-				<li#{if 'evaluation' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.evaluation()}'>&{'menu.evaluation'}</a></li>
+				<li#{if 'asset' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.asset()}'>&{'menu.asset'}</a></li>
+				<li#{if 'threat' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.threat()}'>&{'menu.threat'}</a></li>
+				<li#{if 'control' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.control()}'>&{'menu.control'}</a></li>
+				<li#{if 'impact' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.impact()}'>&{'menu.impact'}</a></li>
 				<li#{if 'treatment' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.treatment()}'>&{'menu.treatment'}</a></li>
-				<li#{if 'acceptance' == request.actionMethod} class='active'#{/if}><a href='@{RiskController.acceptance()}'>&{'menu.acceptance'}</a></li>
 			</ul>
 		</div>
 	</div>

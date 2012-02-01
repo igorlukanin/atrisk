@@ -31,15 +31,11 @@ form.close=Закрыть
 
 menu.main=Обзор
 menu.context=Контекст
-menu.id=Идентификация
-menu.idAsset=Активы
-menu.idThreat=Угрозы
-menu.idControl=Защитные меры
-menu.idImpact=Ущерб
-menu.analysis=Анализ
-menu.evaluation=Оценка
-menu.treatment=Обработка
-menu.acceptance=Принятие
+menu.asset=Активы
+menu.threat=Угрозы
+menu.control=Защитные меры
+menu.impact=Ущерб
+menu.treatment=План обработки
 
 page.context.scope.title=Область управления рисками
 
