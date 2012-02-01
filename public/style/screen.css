@@ -85,12 +85,25 @@ form .text-input {
 }
 
 .modal {
-	top: 280px;
-	max-height: 600px;
+    max-height: inherit;
+    overflow: hidden;
+    width: 760px;
+    margin: -300px 0 0 -380px;
 }
 
 .modal-body {
 	margin-left: 1em;
+    max-height: 525px;
+    overflow: auto;
+}
+
+.modal-body h1 {
+    margin-bottom: 1em;
+}
+
+.modal-body input {
+    font-size: 2em;
+    height: auto;
 }
 
 span.unexistent {
@@ -99,4 +112,12 @@ span.unexistent {
 
 span.useless {
 	text-decoration: line-through;
+}
+
+.input.stars .btn {
+    margin-right: 1em;
+}
+
+input[type="text"].aligned {
+    text-align: right;
 }

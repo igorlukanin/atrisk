@@ -1,9 +1,9 @@
 package models;
 
-import play.db.jpa.*;
-import play.mvc.*;
+import play.db.jpa.Model;
+import play.mvc.Scope;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 
 @Entity
 public class RiskScope extends Model {

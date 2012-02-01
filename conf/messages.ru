@@ -26,6 +26,8 @@ form.new=...
 form.delete=✕
 form.save=Сохранить
 form.cancel=Отмена
+form.info=...
+form.close=Закрыть
 
 menu.main=Обзор
 menu.context=Контекст
@@ -71,5 +73,14 @@ page.id.control.pe=Меры, связанные с персоналом
 page.id.control.hs=Программно-аппаратные меры
 page.id.control.co=Защита коммуникаций
 page.id.control.cy=Меры обеспечения непрерывности
-page.id.control.link.info=…
 page.id.control.link.start=Активы
+
+page.id.impact.nothing=Ни одного актива, ущерб отсутствует.
+page.id.impact.overall=Общий ущерб
+page.id.impact.including=в том числе:
+page.id.impact.recovery=Минимальное время восстановления, дней
+page.id.impact.worktime=Затраты на ликвидацию, человеко-дней
+page.id.impact.money=Ущерб в денежном эквиваленте, руб.
+page.id.impact.human=Вред здоровью человека
+page.id.impact.nature=Экологический ущерб
+page.id.impact.image=Репутационные потери

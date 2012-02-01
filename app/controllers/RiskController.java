@@ -1,24 +1,29 @@
 package controllers;
 
-import models.*;
-import play.data.validation.*;
-import play.mvc.*;
+import models.Control;
+import models.Impact;
+import models.PrimaryAsset;
+import models.RiskScope;
+import models.SupportingAsset;
+import models.Threat;
+import play.data.validation.Validation;
+import play.mvc.Controller;
 
-import java.util.*;
+import java.util.List;
 
 public class RiskController extends Controller {
-    @Before
-    private static void checkAuthentication() {
-        if (null == session.get("user")) {
-            redirect("HomeController.root");
-        }
-        
-        if (null == RiskScope.findBySession(session)) {
-            redirect("HomeController.logout");
-        }
-
-        renderArgs.put("user",User.findBySession(session));
-    }
+//    @Before
+//    private static void checkAuthentication() {
+//        if (null == session.get("user")) {
+//            redirect("HomeController.root");
+//        }
+//
+//        if (null == RiskScope.findBySession(session)) {
+//            redirect("HomeController.logout");
+//        }
+//
+//        renderArgs.put("user",User.findBySession(session));
+//    }
 
     public static void main() {
         RiskScope scope = RiskScope.findBySession(session);
@@ -292,6 +297,18 @@ public class RiskController extends Controller {
     public static void idImpact() {
         List<Impact> impacts = Impact.find("order by asset.name, threat.name").fetch();
         render(impacts);
+    }
+
+    public static void setImpactInfo(long impactId) {
+        Impact impact = Impact.findById(impactId);
+
+        if (null != impact) {
+//            control.implemented = null != params.get("implemented");
+//            control.effective = null != params.get("effective");
+//            control.save();
+        }
+
+        idControl();
     }
 
     public static void analysis() {

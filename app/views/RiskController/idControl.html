@@ -14,7 +14,7 @@
 				<tr>
 					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
 					<td class='tail'>
-						<a control-id='${control.id}' class='select-additional-info btn small'>&{'page.id.control.link.info'}</a>
+						<a control-id='${control.id}' class='select-additional-info btn small'>&{'form.info'}</a>
 						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
 						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
 					</td>
@@ -31,7 +31,7 @@
 				<tr>
 					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
 					<td class='tail'>
-						<a control-id='${control.id}' class='select-additional-info btn small'>&{'page.id.control.link.info'}</a>
+						<a control-id='${control.id}' class='select-additional-info btn small'>&{'form.info'}</a>
 						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
 						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
 					</td>
@@ -75,7 +75,7 @@
 				<tr>
 					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
 					<td class='tail'>
-						<a control-id='${control.id}' class='select-additional-info btn small'>&{'page.id.control.link.info'}</a>
+						<a control-id='${control.id}' class='select-additional-info btn small'>&{'form.info'}</a>
 						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
 						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
 					</td>
@@ -92,7 +92,7 @@
 				<tr>
 					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
 					<td class='tail'>
-						<a control-id='${control.id}' class='select-additional-info btn small'>&{'page.id.control.link.info'}</a>
+						<a control-id='${control.id}' class='select-additional-info btn small'>&{'form.info'}</a>
 						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
 						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
 					</td>
@@ -136,7 +136,7 @@
 				<tr>
 					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
 					<td class='tail'>
-						<a control-id='${control.id}' class='select-additional-info btn small'>&{'page.id.control.link.info'}</a>
+						<a control-id='${control.id}' class='select-additional-info btn small'>&{'form.info'}</a>
 						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
 						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
 					</td>
@@ -153,7 +153,7 @@
 				<tr>
 					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
 					<td class='tail'>
-						<a control-id='${control.id}' class='select-additional-info btn small'>&{'page.id.control.link.info'}</a>
+						<a control-id='${control.id}' class='select-additional-info btn small'>&{'form.info'}</a>
 						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
 						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
 					</td>
@@ -189,7 +189,7 @@
 		#{form @RiskController.setControlInfo()}
 		<input type="hidden" name="controlId"/>
 
-		<h2></h2>
+		<h1></h1>
 
 		<ul class="inputs-list">
 			<li>
@@ -335,7 +335,7 @@
 
 			$.each(values,function(i,value) {
 				if (i == id) {
-					$("#control-modal-info h2").text(value[0]);
+					$("#control-modal-info h1").text(value[0]);
 					$("#control-modal-info input[name='controlId']").attr("value",id);
 
 					var imBox = $("#control-modal-info input[name='implemented']");

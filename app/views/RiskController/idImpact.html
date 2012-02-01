@@ -1,6 +1,173 @@
-#{extends 'RiskController/id.html'/}
-#{set title:messages.get('project.name')/}
+#{extends "RiskController/id.html"/}
+#{set title:messages.get("project.name")/}
 
-#{list items:impacts, as:'impact'}
-	<p>${impact.getAsset().name} - ${impact.getThreat().name}</p>
-#{/list}
+<div class="container">
+	<div class="row">
+		<div class="span16">
+			<table class="condensed-table">
+				<tbody>
+				#{list items:impacts, as:"impact"}
+				<tr>
+					<td>${impact.asset.name}: ${impact.threat.name}</td>
+					<td class="tail">
+						<a data-id="${impact.id}" class="btn small" data-controls-modal="modal" data-backdrop="true" data-keyboard="true">&{"form.info"}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{"page.id.impact.nothing"}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div id="modal" class="modal hide">
+	<div class="modal-body">
+		<h1></h1>
+
+		<form action="#">
+			<div class="clearfix">
+				<label>&{'page.id.impact.overall'}</label>
+				<div class="input stars overall-stars"><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a></div>
+			</div>
+			<div class="clearfix">
+				<label>&{'page.id.impact.including'}</label>
+			</div>
+			<div class="clearfix">
+				<label>&{'page.id.impact.recovery'}</label>
+				<div class="input recovery-number"><input class="span4 aligned numbers-only" type="text"/></div>
+			</div>
+			<div class="clearfix">
+				<label>&{'page.id.impact.worktime'}</label>
+				<div class="input worktime-number"><input class="span4 aligned numbers-only" type="text"/></div>
+			</div>
+			<div class="clearfix">
+				<label>&{'page.id.impact.money'}</label>
+				<div class="input money-number"><input class="span4 aligned numbers-only" type="text"/></div>
+			</div>
+			<div class="clearfix">
+				<label>&{'page.id.impact.human'}</label>
+				<div class="input stars human-stars"><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a></div>
+			</div>
+			<div class="clearfix">
+				<label>&{'page.id.impact.nature'}</label>
+				<div class="input stars nature-stars"><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a></div>
+			</div>
+			<div class="clearfix">
+				<label>&{'page.id.impact.image'}</label>
+				<div class="input stars image-stars"><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a></div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn primary">&{"form.close"}</a>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		var renderModal = function(modal,data) {
+			modal.find("h1").text(data.asset.name + ": " + data.threat.name);
+
+			var overallStars = modal.find(".overall-stars .btn");
+			overallStars.attr("data-id",data.id);
+			overallStars.removeClass("primary");
+			overallStars.eq(data.overall).addClass("primary");
+
+			var recoveryNumber = modal.find(".recovery-number input");
+			recoveryNumber.attr("data-id",data.id);
+			recoveryNumber.attr("value",data.recovery);
+
+			var worktimeNumber = modal.find(".worktime-number input");
+			worktimeNumber.attr("data-id",data.id);
+			worktimeNumber.attr("value",data.worktime);
+
+			var moneyNumber = modal.find(".money-number input");
+			moneyNumber.attr("data-id",data.id);
+			moneyNumber.attr("value",data.money);
+
+			var humanStars = modal.find(".human-stars .btn");
+			humanStars.attr("data-id",data.id);
+			humanStars.removeClass("primary");
+			humanStars.eq(data.human).addClass("primary");
+
+			var natureStars = modal.find(".nature-stars .btn");
+			natureStars.attr("data-id",data.id);
+			natureStars.removeClass("primary");
+			natureStars.eq(data.nature).addClass("primary");
+
+			var imageStars = modal.find(".image-stars .btn");
+			imageStars.attr("data-id",data.id);
+			imageStars.removeClass("primary");
+			imageStars.eq(data.image).addClass("primary");
+		};
+
+		var sourceGet = #{jsAction @ImpactController.get(":id")/};
+		var sourceOverallSet = #{jsAction @ImpactController.setOverall(":id",":value")/};
+		var sourceRecoverySet = #{jsAction @ImpactController.setRecovery(":id",":value")/};
+		var sourceWorktimeSet = #{jsAction @ImpactController.setWorktime(":id",":value")/};
+		var sourceMoneySet = #{jsAction @ImpactController.setMoney(":id",":value")/};
+		var sourceHumanSet = #{jsAction @ImpactController.setHuman(":id",":value")/};
+		var sourceNatureSet = #{jsAction @ImpactController.setNature(":id",":value")/};
+		var sourceImageSet = #{jsAction @ImpactController.setImage(":id",":value")/};
+
+		$("a[data-id]").click(function() {
+			$.get(sourceGet({id: $(this).attr("data-id")}),function(data) {
+				renderModal($("#modal"),data)
+			});
+		});
+
+		$(".modal .overall-stars .btn").click(function() {
+			$.post(sourceOverallSet({id: $(this).attr("data-id"), value: $(this).parent().find("> *").index(this)}),function(data) {
+				renderModal($("#modal"),data)
+			});
+		});
+
+		$(".modal .recovery-number input").change(function() {
+			$.post(sourceRecoverySet({id: $(this).attr("data-id"), value: $(this).attr("value")}),function(data) {
+				renderModal($("#modal"),data)
+			});
+		});
+
+		$(".modal .worktime-number input").change(function() {
+			$.post(sourceWorktimeSet({id: $(this).attr("data-id"), value: $(this).attr("value")}),function(data) {
+				renderModal($("#modal"),data)
+			});
+		});
+
+		$(".modal .money-number input").change(function() {
+			$.post(sourceMoneySet({id: $(this).attr("data-id"), value: $(this).attr("value")}),function(data) {
+				renderModal($("#modal"),data)
+			});
+		});
+
+		$(".modal .human-stars .btn").click(function() {
+			$.post(sourceHumanSet({id: $(this).attr("data-id"), value: $(this).parent().find("> *").index(this)}),function(data) {
+				renderModal($("#modal"),data)
+			});
+		});
+
+		$(".modal .nature-stars .btn").click(function() {
+			$.post(sourceNatureSet({id: $(this).attr("data-id"), value: $(this).parent().find("> *").index(this)}),function(data) {
+				renderModal($("#modal"),data)
+			});
+		});
+
+		$(".modal .image-stars .btn").click(function() {
+			$.post(sourceImageSet({id: $(this).attr("data-id"), value: $(this).parent().find("> *").index(this)}),function(data) {
+				renderModal($("#modal"),data)
+			});
+		});
+
+		$("input.numbers-only").keypress(function(event) {
+			var controlKeys = [8, 9, 13, 35, 36, 37, 39];
+			var isControlKey = controlKeys.join(",").match(new RegExp(event.which));
+			if (! event.which || (49 <= event.which && event.which <= 57) || (48 == event.which && $(this).attr("value")) || isControlKey) { return; }
+			else { event.preventDefault(); }
+		});
+
+		$(".modal .btn.primary").click(function() {
+			$(this).parents(".modal:first").modal("hide");
+		});
+	});
+</script>

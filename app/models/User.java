@@ -1,13 +1,16 @@
 package models;
 
-import org.apache.commons.codec.digest.*;
-import play.*;
-import play.db.jpa.*;
-import play.i18n.*;
-import play.mvc.*;
+import org.apache.commons.codec.digest.DigestUtils;
+import play.Play;
+import play.db.jpa.Model;
+import play.i18n.Messages;
+import play.mvc.Scope;
 
-import javax.persistence.*;
-import java.util.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User extends Model {

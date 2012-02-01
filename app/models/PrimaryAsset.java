@@ -1,8 +1,11 @@
 package models;
 
-import play.db.jpa.*;
+import play.db.jpa.Model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class PrimaryAsset extends Model {

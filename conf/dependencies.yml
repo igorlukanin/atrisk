@@ -2,3 +2,4 @@
 
 require:
     - play -> playapps 1.4
+    - net.sf.flexjson -> flexjson 2.1

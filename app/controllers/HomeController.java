@@ -1,9 +1,10 @@
 package controllers;
 
-import models.*;
-import play.data.validation.*;
-import play.i18n.*;
-import play.mvc.*;
+import models.User;
+import play.data.validation.Validation;
+import play.i18n.Messages;
+import play.mvc.Before;
+import play.mvc.Controller;
 
 public class HomeController extends Controller {
     @Before(unless = "logout")
