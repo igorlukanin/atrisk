@@ -28,7 +28,7 @@ public class SupportingAsset extends Model {
     @Enumerated(EnumType.ORDINAL) public Type type;
     @ManyToMany(cascade = CascadeType.ALL) public List<PrimaryAsset> primaryAssets;
     
-    @OneToMany(cascade = CascadeType.ALL) List<Impact> impacts;
+    @OneToMany(cascade = CascadeType.ALL) List<Risk> risks;
     @ManyToMany(cascade = CascadeType.ALL) List<Threat> threats;
 
     public static SupportingAsset create(RiskScope scope,String name,Type type) {

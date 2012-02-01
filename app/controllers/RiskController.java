@@ -1,13 +1,15 @@
 package controllers;
 
+import flexjson.JSONSerializer;
 import models.Control;
-import models.Impact;
+import models.Risk;
 import models.PrimaryAsset;
 import models.RiskScope;
 import models.SupportingAsset;
 import models.Threat;
 import play.data.validation.Validation;
 import play.mvc.Controller;
+import util.Parser;
 
 import java.util.List;
 
@@ -201,7 +203,7 @@ public class RiskController extends Controller {
 
                     if (null != asset) {
                         threat.assets.add(asset);
-                        Impact.create(RiskScope.findBySession(session),asset,threat);
+                        Risk.create(RiskScope.findBySession(session),asset,threat);
                     }
                 }
             }
@@ -290,12 +292,111 @@ public class RiskController extends Controller {
         control();
     }
 
-    public static void impact() {
-        List<Impact> impacts = Impact.find("order by asset.name, threat.name").fetch();
-        render(impacts);
+    public static void risk() {
+        List<Risk> risks = Risk.find("order by asset.name, threat.name").fetch();
+        render(risks);
     }
 
     public static void treatment() {
         render();
+    }
+
+    //////////////////////
+
+    public static void get(Long id) {
+        renderJSON(new JSONSerializer().
+                include("id","asset.name","threat.name","overall","recovery","worktime","money","human","nature","image").
+                exclude("*").serialize(Risk.findById(id)));
+    }
+
+    public static void setOverall(Long id,int value) {
+        try {
+            Risk risk = Risk.findById(id);
+            risk.overall = Parser.bound(value,0,4);
+            risk.save();
+
+            get(id);
+        }
+        catch (NullPointerException e) {
+            error();
+        }
+    }
+
+    public static void setRecovery(Long id,int value) {
+        try {
+            Risk risk = Risk.findById(id);
+            risk.recovery = Parser.bound(value,0,Integer.MAX_VALUE);
+            risk.save();
+
+            get(id);
+        }
+        catch (NullPointerException e) {
+            error();
+        }
+    }
+
+    public static void setWorktime(Long id,int value) {
+        try {
+            Risk risk = Risk.findById(id);
+            risk.worktime = Parser.bound(value,0,Integer.MAX_VALUE);
+            risk.save();
+
+            get(id);
+        }
+        catch (NullPointerException e) {
+            error();
+        }
+    }
+
+    public static void setMoney(Long id,int value) {
+        try {
+            Risk risk = Risk.findById(id);
+            risk.money = Parser.bound(value,0,Integer.MAX_VALUE);
+            risk.save();
+
+            get(id);
+        }
+        catch (NullPointerException e) {
+            error();
+        }
+    }
+
+    public static void setHuman(Long id,int value) {
+        try {
+            Risk risk = Risk.findById(id);
+            risk.human = Parser.bound(value,0,4);
+            risk.save();
+
+            get(id);
+        }
+        catch (NullPointerException e) {
+            error();
+        }
+    }
+
+    public static void setNature(Long id,int value) {
+        try {
+            Risk risk = Risk.findById(id);
+            risk.nature = Parser.bound(value,0,4);
+            risk.save();
+
+            get(id);
+        }
+        catch (NullPointerException e) {
+            error();
+        }
+    }
+
+    public static void setImage(Long id,int value) {
+        try {
+            Risk risk = Risk.findById(id);
+            risk.image = Parser.bound(value,0,4);
+            risk.save();
+
+            get(id);
+        }
+        catch (NullPointerException e) {
+            error();
+        }
     }
 }

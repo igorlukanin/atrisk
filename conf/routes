@@ -28,17 +28,17 @@ POST /control/add                                   RiskController.addControl
 GET  /control/{id}/delete                           RiskController.deleteControl
 POST /control/bind                                  RiskController.bindControlToAsset
 POST /control/info                                  RiskController.setControlInfo
-GET  /impact                                        RiskController.impact
+GET  /risk                                          RiskController.risk
 GET  /treatment                                     RiskController.treatment
 
-GET  /api/impact/{id}                               ImpactController.get
-POST /api/impact/{id}/overall                       ImpactController.setOverall
-POST /api/impact/{id}/recovery                      ImpactController.setRecovery
-POST /api/impact/{id}/worktime                      ImpactController.setWorktime
-POST /api/impact/{id}/money                         ImpactController.setMoney
-POST /api/impact/{id}/human                         ImpactController.setHuman
-POST /api/impact/{id}/nature                        ImpactController.setNature
-POST /api/impact/{id}/image                         ImpactController.setImage
+GET  /api/risk/{id}                                 RiskController.get
+POST /api/risk/{id}/overall                         RiskController.setOverall
+POST /api/risk/{id}/recovery                        RiskController.setRecovery
+POST /api/risk/{id}/worktime                        RiskController.setWorktime
+POST /api/risk/{id}/money                           RiskController.setMoney
+POST /api/risk/{id}/human                           RiskController.setHuman
+POST /api/risk/{id}/nature                          RiskController.setNature
+POST /api/risk/{id}/image                           RiskController.setImage
 
 # Map static resources from the /app/public folder to the /public path
 GET  /public/                                       staticDir:public

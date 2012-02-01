@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Impact extends Model {
+public class Risk extends Model {
     @ManyToOne public RiskScope scope;
     @ManyToOne(cascade = CascadeType.ALL) public SupportingAsset asset;
     @ManyToOne(cascade = CascadeType.ALL) public Threat threat;
@@ -19,11 +19,11 @@ public class Impact extends Model {
     public int nature = 2; // 0..4
     public int image = 2; // 0..4
 
-    public static Impact create(RiskScope scope,SupportingAsset asset,Threat threat) {
-        Impact impact = new Impact();
-        impact.scope = scope;
-        impact.asset = asset;
-        impact.threat = threat;
-        return impact.save();
+    public static Risk create(RiskScope scope,SupportingAsset asset,Threat threat) {
+        Risk risk = new Risk();
+        risk.scope = scope;
+        risk.asset = asset;
+        risk.threat = threat;
+        return risk.save();
     }
 }

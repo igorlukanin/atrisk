@@ -6,15 +6,15 @@
 		<div class="span16">
 			<table class="condensed-table">
 				<tbody>
-				#{list items:impacts, as:"impact"}
+				#{list items:risks, as:"risk"}
 				<tr>
-					<td>${impact.asset.name}: ${impact.threat.name}</td>
+					<td>${risk.asset.name}: ${risk.threat.name}</td>
 					<td class="tail">
-						<a data-id="${impact.id}" class="btn small" data-controls-modal="modal" data-backdrop="true" data-keyboard="true">&{"form.info"}</a>
+						<a data-id="${risk.id}" class="btn small" data-controls-modal="modal" data-backdrop="true" data-keyboard="true">&{"form.info"}</a>
 					</td>
 				</tr>
 				#{/list}
-				#{else}<tr><td>&{"page.id.impact.nothing"}</td></tr>#{/else}
+				#{else}<tr><td>&{"page.id.risk.nothing"}</td></tr>#{/else}
 				</tbody>
 			</table>
 		</div>
@@ -27,34 +27,34 @@
 
 		<form action="#">
 			<div class="clearfix">
-				<label>&{'page.id.impact.overall'}</label>
+				<label>&{'page.id.risk.overall'}</label>
 				<div class="input stars overall-stars"><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a></div>
 			</div>
 			<div class="clearfix">
-				<label>&{'page.id.impact.including'}</label>
+				<label>&{'page.id.risk.including'}</label>
 			</div>
 			<div class="clearfix">
-				<label>&{'page.id.impact.recovery'}</label>
+				<label>&{'page.id.risk.recovery'}</label>
 				<div class="input recovery-number"><input class="span4 aligned numbers-only" type="text"/></div>
 			</div>
 			<div class="clearfix">
-				<label>&{'page.id.impact.worktime'}</label>
+				<label>&{'page.id.risk.worktime'}</label>
 				<div class="input worktime-number"><input class="span4 aligned numbers-only" type="text"/></div>
 			</div>
 			<div class="clearfix">
-				<label>&{'page.id.impact.money'}</label>
+				<label>&{'page.id.risk.money'}</label>
 				<div class="input money-number"><input class="span4 aligned numbers-only" type="text"/></div>
 			</div>
 			<div class="clearfix">
-				<label>&{'page.id.impact.human'}</label>
+				<label>&{'page.id.risk.human'}</label>
 				<div class="input stars human-stars"><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a></div>
 			</div>
 			<div class="clearfix">
-				<label>&{'page.id.impact.nature'}</label>
+				<label>&{'page.id.risk.nature'}</label>
 				<div class="input stars nature-stars"><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a></div>
 			</div>
 			<div class="clearfix">
-				<label>&{'page.id.impact.image'}</label>
+				<label>&{'page.id.risk.image'}</label>
 				<div class="input stars image-stars"><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a><a class="btn">&nbsp;</a></div>
 			</div>
 		</form>
@@ -102,14 +102,14 @@
 			imageStars.eq(data.image).addClass("primary");
 		};
 
-		var sourceGet = #{jsAction @ImpactController.get(":id")/};
-		var sourceOverallSet = #{jsAction @ImpactController.setOverall(":id",":value")/};
-		var sourceRecoverySet = #{jsAction @ImpactController.setRecovery(":id",":value")/};
-		var sourceWorktimeSet = #{jsAction @ImpactController.setWorktime(":id",":value")/};
-		var sourceMoneySet = #{jsAction @ImpactController.setMoney(":id",":value")/};
-		var sourceHumanSet = #{jsAction @ImpactController.setHuman(":id",":value")/};
-		var sourceNatureSet = #{jsAction @ImpactController.setNature(":id",":value")/};
-		var sourceImageSet = #{jsAction @ImpactController.setImage(":id",":value")/};
+		var sourceGet = #{jsAction @RiskController.get(":id")/};
+		var sourceOverallSet = #{jsAction @RiskController.setOverall(":id",":value")/};
+		var sourceRecoverySet = #{jsAction @RiskController.setRecovery(":id",":value")/};
+		var sourceWorktimeSet = #{jsAction @RiskController.setWorktime(":id",":value")/};
+		var sourceMoneySet = #{jsAction @RiskController.setMoney(":id",":value")/};
+		var sourceHumanSet = #{jsAction @RiskController.setHuman(":id",":value")/};
+		var sourceNatureSet = #{jsAction @RiskController.setNature(":id",":value")/};
+		var sourceImageSet = #{jsAction @RiskController.setImage(":id",":value")/};
 
 		$("a[data-id]").click(function() {
 			$.get(sourceGet({id: $(this).attr("data-id")}),function(data) {
