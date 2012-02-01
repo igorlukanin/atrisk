@@ -110,58 +110,43 @@
 	</div>
 	<div class="row">
 		<div class="span8">
-			<table class="condensed-table">
-				<tbody>
-				#{list items:supportingNetworkAssets, as:"asset"}
-				<tr>
-					<td>${asset.name}</td>
-					<td class="tail">
-						<a asset-id="${asset.id}" class="select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small">&{"page.asset.supporting.link.start"}</a>
-						<a class="btn small" href="@{RiskController.deleteSupportingAsset(asset.id)}">&{"form.delete"}</a>
-					</td>
-				</tr>
-				#{/list}
-				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
-				</tbody>
-			</table>
+			<table class="condensed-table"><tbody>
+			#{list items:supportingNetworkAssets, as:"asset"}
+			<tr><td class='activator' supporting-data-id="${asset.id}" data-controls-modal="supporting-modal" data-backdrop="true" data-keyboard="true">
+				#{if asset.icon}<img class='icon' src="${play.configuration.getProperty('external.fugue.path')}${asset.icon}"/>#{/if}
+			${asset.name}
+			</td></tr>
+			#{/list}
+			#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
+			</tbody></table>
 		</div>
 		<div class="span8">
-			<table class="condensed-table">
-				<tbody>
-				#{list items:supportingPersonnelAssets, as:"asset"}
-				<tr>
-					<td>${asset.name}</td>
-					<td class="tail">
-						<a asset-id="${asset.id}" class="select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small">&{"page.asset.supporting.link.start"}</a>
-						<a class="btn small" href="@{RiskController.deleteSupportingAsset(asset.id)}">&{"form.delete"}</a>
-					</td>
-				</tr>
-				#{/list}
-				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
-				</tbody>
-			</table>
+			<table class="condensed-table"><tbody>
+			#{list items:supportingPersonnelAssets, as:"asset"}
+			<tr><td class='activator' supporting-data-id="${asset.id}" data-controls-modal="supporting-modal" data-backdrop="true" data-keyboard="true">
+				#{if asset.icon}<img class='icon' src="${play.configuration.getProperty('external.fugue.path')}${asset.icon}"/>#{/if}
+			${asset.name}
+			</td></tr>
+			#{/list}
+			#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
+			</tbody></table>
 		</div>
 	</div>
 	<div class="row">
 		<div class="span8">
-		*{#{form @RiskController.addSupportingAsset()}}*
+		#{form @SupportingAssetController.add()}
 			<input name="type" type="hidden" value="${models.SupportingAsset.Type.NETWORK}"/>
-			<div class="clearfix">
-				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
-			</div>
-		*{#{/form}}*
+			<input class="span7" name="name" type="text" title="&{"form.new"}"/>
+		#{/form}
 		</div>
 		<div class="span8">
-		*{#{form @RiskController.addSupportingAsset()}}*
+		#{form @SupportingAssetController.add()}
 			<input name="type" type="hidden" value="${models.SupportingAsset.Type.PERSONNEL}"/>
-			<div class="clearfix">
-				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
-			</div>
-		*{#{/form}}*
+			<input class="span7" name="name" type="text" title="&{"form.new"}"/>
+		#{/form}
 		</div>
 	</div>
 </div>
-
 <div class="container">
 	<div class="row">
 		<div class="span8"><h2>&{"page.asset.supporting.site"}</h2></div>
@@ -169,54 +154,40 @@
 	</div>
 	<div class="row">
 		<div class="span8">
-			<table class="condensed-table">
-				<tbody>
-				#{list items:supportingSiteAssets, as:"asset"}
-				<tr>
-					<td>${asset.name}</td>
-					<td class="tail">
-						<a asset-id="${asset.id}" class="select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small">&{"page.asset.supporting.link.start"}</a>
-						<a class="btn small" href="@{RiskController.deleteSupportingAsset(asset.id)}">&{"form.delete"}</a>
-					</td>
-				</tr>
-				#{/list}
-				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
-				</tbody>
-			</table>
+			<table class="condensed-table"><tbody>
+			#{list items:supportingSiteAssets, as:"asset"}
+			<tr><td class='activator' supporting-data-id="${asset.id}" data-controls-modal="supporting-modal" data-backdrop="true" data-keyboard="true">
+				#{if asset.icon}<img class='icon' src="${play.configuration.getProperty('external.fugue.path')}${asset.icon}"/>#{/if}
+			${asset.name}
+			</td></tr>
+			#{/list}
+			#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
+			</tbody></table>
 		</div>
 		<div class="span8">
-			<table class="condensed-table">
-				<tbody>
-				#{list items:supportingOrganizationAssets, as:"asset"}
-				<tr>
-					<td>${asset.name}</td>
-					<td class="tail">
-						<a asset-id="${asset.id}" class="select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small">&{"page.asset.supporting.link.start"}</a>
-						<a class="btn small" href="@{RiskController.deleteSupportingAsset(asset.id)}">&{"form.delete"}</a>
-					</td>
-				</tr>
-				#{/list}
-				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
-				</tbody>
-			</table>
+			<table class="condensed-table"><tbody>
+			#{list items:supportingOrganizationAssets, as:"asset"}
+			<tr><td class='activator' supporting-data-id="${asset.id}" data-controls-modal="supporting-modal" data-backdrop="true" data-keyboard="true">
+				#{if asset.icon}<img class='icon' src="${play.configuration.getProperty('external.fugue.path')}${asset.icon}"/>#{/if}
+			${asset.name}
+			</td></tr>
+			#{/list}
+			#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
+			</tbody></table>
 		</div>
 	</div>
 	<div class="row">
 		<div class="span8">
-		*{#{form @RiskController.addSupportingAsset()}}*
+		#{form @SupportingAssetController.add()}
 			<input name="type" type="hidden" value="${models.SupportingAsset.Type.SITE}"/>
-			<div class="clearfix">
-				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
-			</div>
-		*{#{/form}}*
+			<input class="span7" name="name" type="text" title="&{"form.new"}"/>
+		#{/form}
 		</div>
 		<div class="span8">
-		*{#{form @RiskController.addSupportingAsset()}}*
+		#{form @SupportingAssetController.add()}
 			<input name="type" type="hidden" value="${models.SupportingAsset.Type.ORGANIZATION}"/>
-			<div class="clearfix">
-				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
-			</div>
-		*{#{/form}}*
+			<input class="span7" name="name" type="text" title="&{"form.new"}"/>
+		#{/form}
 		</div>
 	</div>
 </div>

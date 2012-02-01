@@ -36,7 +36,9 @@ public class SupportingAssetController extends Controller {
 
     public static void delete(long id) {
         try {
-            SupportingAsset.delete("id = ?",id);
+            SupportingAsset asset = SupportingAsset.findById(id);
+            asset.primaryAssets = null;
+            asset.delete();
         }
         catch (NullPointerException e) {
             error();
@@ -86,8 +88,6 @@ public class SupportingAssetController extends Controller {
             SupportingAsset supportingAsset = SupportingAsset.findById(id);
             PrimaryAsset primaryAsset = PrimaryAsset.findById(value);
             supportingAsset.primaryAssets.add(primaryAsset);
-            primaryAsset.supportingAssets.add(supportingAsset);
-            primaryAsset.save();
             supportingAsset.save();
         }
         catch (NullPointerException e) {
@@ -102,8 +102,6 @@ public class SupportingAssetController extends Controller {
             SupportingAsset supportingAsset = SupportingAsset.findById(id);
             PrimaryAsset primaryAsset = PrimaryAsset.findById(value);
             supportingAsset.primaryAssets.remove(primaryAsset);
-            primaryAsset.supportingAssets.remove(supportingAsset);
-            primaryAsset.save();
             supportingAsset.save();
         }
         catch (NullPointerException e) {

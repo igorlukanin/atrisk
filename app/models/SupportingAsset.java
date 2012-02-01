@@ -39,7 +39,11 @@ public class SupportingAsset extends Model {
     @Enumerated(EnumType.ORDINAL)
     public Type type;
 
-    @ManyToMany(mappedBy = "supportingAssets",cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "primaryasset_supportingasset",
+            inverseJoinColumns = @JoinColumn(name = "primaryasset_id"),
+            joinColumns = @JoinColumn(name = "supportingasset_id"))
     public List<PrimaryAsset> primaryAssets;
 
     @OneToMany(mappedBy = "asset",orphanRemoval = true)
