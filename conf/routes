@@ -14,8 +14,6 @@ GET  /context                                       RiskController.context
 POST /context/scope                                 RiskController.setScope
 GET  /context/scope/commercial/{value}              RiskController.setScopeCommercial
 GET  /asset                                         RiskController.asset
-POST /asset/primary/add                             RiskController.addPrimaryAsset
-GET  /asset/primary/{id}/delete                     RiskController.deletePrimaryAsset
 POST /asset/supporting/add                          RiskController.addSupportingAsset
 GET  /asset/supporting/{id}/delete                  RiskController.deleteSupportingAsset
 POST /asset/supporting/bind                         RiskController.bindToPrimaryAsset
@@ -31,7 +29,21 @@ POST /control/info                                  RiskController.setControlInf
 GET  /risk                                          RiskController.risk
 GET  /treatment                                     RiskController.treatment
 
+POST /api/primary-asset/add                         PrimaryAssetController.add
+GET  /api/primary-asset/list/{type}                 PrimaryAssetController.list
 GET  /api/primary-asset/{id}                        PrimaryAssetController.get
+POST /api/primary-asset/{id}/delete                 PrimaryAssetController.delete
+POST /api/primary-asset/{id}/icon                   PrimaryAssetController.setIcon
+POST /api/primary-asset/{id}/owner                  PrimaryAssetController.setOwner
+POST /api/primary-asset/{id}/criticality            PrimaryAssetController.setCriticality
+
+POST /api/supporting-asset/add                      SupportingAssetController.add
+GET  /api/supporting-asset/{id}                     SupportingAssetController.get
+POST /api/supporting-asset/{id}/delete              SupportingAssetController.delete
+POST /api/supporting-asset/{id}/icon                SupportingAssetController.setIcon
+POST /api/supporting-asset/{id}/owner               SupportingAssetController.setOwner
+POST /api/supporting-asset/{id}/bind/{value}        SupportingAssetController.bind
+POST /api/supporting-asset/{id}/unbind/{value}      SupportingAssetController.unbind
 
 GET  /api/risk/{id}                                 RiskController.get
 POST /api/risk/{id}/overall                         RiskController.setOverall

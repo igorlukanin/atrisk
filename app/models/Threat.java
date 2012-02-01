@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -19,9 +18,6 @@ public class Threat extends Model {
         TECHNICAL_FAILURE,
         DELIBERATE_ACTS
     }
-    
-    @ManyToOne
-    public RiskScope scope;
 
     public String name;
 
@@ -34,9 +30,8 @@ public class Threat extends Model {
     @ManyToMany(mappedBy = "threats")
     public List<SupportingAsset> assets;
     
-    public static Threat create(RiskScope scope,String name,Type type) {
+    public static Threat create(String name,Type type) {
         Threat threat = new Threat();
-        threat.scope = scope;
         threat.name = name;
         threat.type = type;
         return threat.save();

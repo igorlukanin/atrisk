@@ -101,11 +101,6 @@ form .text-input {
     margin-bottom: 1em;
 }
 
-.modal-body input {
-    font-size: 2em;
-    height: auto;
-}
-
 span.unexistent {
 	color: #999999;
 }
@@ -114,24 +109,37 @@ span.useless {
 	text-decoration: line-through;
 }
 
-.input.stars .btn, .input.icons .btn {
-    height: 24px;
+.input.icons .btn {
+    background: #ffffff no-repeat 50% 50%;
+    border-color: #ffffff;
+    border-radius: 0;
+    height: 28px;
     margin-right: 1em;
     margin-bottom: 1em;
     padding: 0;
-    width: 24px;
+    width: 28px;
 }
 
-.input.icons .btn {
-    background: #ffffff no-repeat 50% 50%;
-    border-radius: 0;
-    border: solid 1px #bfbfbf;
-}
-
-.input.icons .btn .selected {
-    border-color: #00438a;
+.input.icons .btn.selected {
+    border-color: rgba(82, 168, 236, 0.8);
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1),0 0 8px rgba(82, 168, 236, 0.6);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1),0 0 8px rgba(82, 168, 236, 0.6);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1),0 0 8px rgba(82, 168, 236, 0.6);
 }
 
 input[type="text"].aligned {
     text-align: right;
+}
+
+img.icon {
+    vertical-align: bottom;
+    padding-right: .25em;
+}
+
+.btn.danger {
+    margin-right: 1em;
+}
+
+.activator {
+    cursor: pointer;
 }

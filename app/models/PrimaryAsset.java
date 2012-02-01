@@ -1,16 +1,17 @@
 package models;
 
-import com.memetix.mst.language.Language;
-import com.memetix.mst.translate.Translate;
-import play.Play;
 import play.db.jpa.Model;
+import util.ScalarHelper;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
-import java.util.ArrayList;
+import javax.persistence.UniqueConstraint;
 import java.util.List;
 
 @Entity
@@ -19,52 +20,36 @@ public class PrimaryAsset extends Model {
         INFO,
         PROCESS
     }
-    
-    @ManyToOne
-    public RiskScope scope;
-
-    public String name;
-    public String translatedName;
 
     @Enumerated(EnumType.ORDINAL)
     public Type type;
 
+    public String name;
+    public String translatedName;
+    public String icon;
+    public String owner;
+    public int criticality = 2; // 0..4
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "primaryasset_supportingasset",
+            joinColumns = @JoinColumn(name = "primaryasset_id"),
+            inverseJoinColumns = @JoinColumn(name = "supportingasset_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"primaryasset_id","supportingasset_id"}))
+    public List<SupportingAsset> supportingAssets;
+
     @Transient
     public List<String> getIcons() {
-        List<String> icons = new ArrayList<String>();
-        
-        try {
-            String[] parts = translatedName.toLowerCase().split(" ");
-
-            for (String part : parts) {
-                String word = part.length() > 4 ? part.substring(0,4) : part;
-
-                for (Icon icon : Icon.find("name like ?","%" + word + "%").<Icon>fetch(12 / parts.length)) {
-                    icons.add(icon.name);
-                }
-            }
-        }
-        catch (Exception e) {e.printStackTrace();}
-
-        return(icons);
+        return Icon.getIcons(translatedName);
     }
 
-    public static PrimaryAsset create(RiskScope scope,String name,Type type) {
+    public static PrimaryAsset create(String name,Type type) {
         PrimaryAsset asset = new PrimaryAsset();
-        asset.scope = scope;
         asset.name = name;
-        asset.translatedName = createTranslatedName(name);
+        asset.translatedName = ScalarHelper.translate(name);
         asset.type = type;
         return asset.save();
     }
     
-    private static String createTranslatedName(String name) {
-        try {
-            Translate.setKey(Play.configuration.getProperty("external.bing.api-key"));
-            return Translate.execute(name,Language.AUTO_DETECT,Language.ENGLISH);
-        }
-        catch (Exception e) {
-            return name;
-        }
-    }
+
 }

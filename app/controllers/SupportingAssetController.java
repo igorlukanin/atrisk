@@ -2,11 +2,11 @@ package controllers;
 
 import flexjson.JSONSerializer;
 import models.PrimaryAsset;
+import models.SupportingAsset;
 import play.data.validation.Validation;
 import play.mvc.Controller;
-import util.ScalarHelper;
 
-public class PrimaryAssetController extends Controller {
+public class SupportingAssetController extends Controller {
     public static void add(String name,String type) {
         try {
             validation.required(name);
@@ -16,9 +16,9 @@ public class PrimaryAssetController extends Controller {
                 throw new IllegalArgumentException(name);
             }
 
-            for (PrimaryAsset.Type t : PrimaryAsset.Type.values()) {
+            for (SupportingAsset.Type t : SupportingAsset.Type.values()) {
                 if (type.equals(t.toString())) {
-                    PrimaryAsset.create(name,t);
+                    SupportingAsset.create(name,t);
                     break;
                 }
             }
@@ -28,37 +28,15 @@ public class PrimaryAssetController extends Controller {
         redirect("RiskController.asset");
     }
 
-    public static void list(String type) {
-        try {
-            validation.required(type);
-
-            if (Validation.hasErrors()) {
-                throw new IllegalArgumentException(type);
-            }
-
-            for (PrimaryAsset.Type t : PrimaryAsset.Type.values()) {
-                if (type.equals(t.toString())) {
-                    renderJSON(new JSONSerializer().
-                            include("id","name","icon").
-                            exclude("*").serialize(PrimaryAsset.find("type = ?",t).fetch()));
-                    break;
-                }
-            }
-        }
-        catch (NullPointerException e) {}
-    }
-
     public static void get(Long id) {
         renderJSON(new JSONSerializer().
-                include("id","name","icon","icons","owner","criticality").
-                exclude("*").serialize(PrimaryAsset.findById(id)));
+                include("id","name","icon","icons","owner","primaryAssets.id").
+                exclude("*").serialize(SupportingAsset.findById(id)));
     }
 
     public static void delete(long id) {
         try {
-            PrimaryAsset asset = PrimaryAsset.findById(id);
-            asset.supportingAssets = null;
-            asset.delete();
+            SupportingAsset.delete("id = ?",id);
         }
         catch (NullPointerException e) {
             error();
@@ -73,7 +51,7 @@ public class PrimaryAssetController extends Controller {
                 throw new IllegalArgumentException(value);
             }
 
-            PrimaryAsset asset = PrimaryAsset.findById(id);
+            SupportingAsset asset = SupportingAsset.findById(id);
             asset.icon = value;
             asset.save();
         }
@@ -92,7 +70,7 @@ public class PrimaryAssetController extends Controller {
                 throw new IllegalArgumentException(value);
             }
 
-            PrimaryAsset asset = PrimaryAsset.findById(id);
+            SupportingAsset asset = SupportingAsset.findById(id);
             asset.owner = value;
             asset.save();
         }
@@ -102,12 +80,31 @@ public class PrimaryAssetController extends Controller {
 
         get(id);
     }
-
-    public static void setCriticality(Long id,int value) {
+    
+    public static void bind(long id,long value) {
         try {
-            PrimaryAsset asset = PrimaryAsset.findById(id);
-            asset.criticality = ScalarHelper.bound(value,0,4);
-            asset.save();
+            SupportingAsset supportingAsset = SupportingAsset.findById(id);
+            PrimaryAsset primaryAsset = PrimaryAsset.findById(value);
+            supportingAsset.primaryAssets.add(primaryAsset);
+            primaryAsset.supportingAssets.add(supportingAsset);
+            primaryAsset.save();
+            supportingAsset.save();
+        }
+        catch (NullPointerException e) {
+            error();
+        }
+
+        get(id);
+    }
+
+    public static void unbind(long id,long value) {
+        try {
+            SupportingAsset supportingAsset = SupportingAsset.findById(id);
+            PrimaryAsset primaryAsset = PrimaryAsset.findById(value);
+            supportingAsset.primaryAssets.remove(primaryAsset);
+            primaryAsset.supportingAssets.remove(supportingAsset);
+            primaryAsset.save();
+            supportingAsset.save();
         }
         catch (NullPointerException e) {
             error();

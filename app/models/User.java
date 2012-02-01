@@ -7,23 +7,21 @@ import play.i18n.Messages;
 import play.mvc.Scope;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User extends Model {
     public String username;
     public String passwordHash;
 
-    @ManyToMany
-    public List<RiskScope> scopes = new ArrayList<RiskScope>();
+    @OneToOne
+    public RiskScope scope;
     
     public static User create(String username,String password) {
         User user = new User();
         user.username = username;
         user.passwordHash = getPasswordHash(password);
-        user.scopes.add(RiskScope.create(Messages.get("model.risk-scope.name")));
+        user.scope = RiskScope.create(Messages.get("model.risk-scope.name"));
         return user.save();
     }
     

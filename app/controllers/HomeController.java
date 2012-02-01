@@ -45,7 +45,7 @@ public class HomeController extends Controller {
     
     private static void login(User user) {
         session.put("user",user.id);
-        session.put("scope",user.scopes.get(0).id);
+        session.put("scope",user.scope.id);
         redirect("RiskController.main");
     }
 

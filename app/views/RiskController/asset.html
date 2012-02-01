@@ -14,50 +14,39 @@
 	</div>
 	<div class="row">
 		<div class="span8">
-			<table class="condensed-table">
-				<tbody>
-				#{list items:primaryProcessAssets, as:"asset"}
-				<tr>
-					<td>${asset.name}</td>
-					<td class="tail">
-						<a primary-data-id="${asset.id}" class="btn small" data-controls-modal="primary-modal" data-backdrop="true" data-keyboard="true">&{"form.info"}</a>
-						<a class="btn small" href="@{RiskController.deletePrimaryAsset(asset.id)}">&{"form.delete"}</a>
-					</td>
-				</tr>
-				#{/list}
-				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
-				</tbody>
-			</table>
+			<table class="condensed-table"><tbody>
+			#{list items:primaryProcessAssets, as:"asset"}
+				<tr><td class='activator' primary-data-id="${asset.id}" data-controls-modal="primary-modal" data-backdrop="true" data-keyboard="true">
+				#{if asset.icon}<img class='icon' src="${play.configuration.getProperty('external.fugue.path')}${asset.icon}"/>#{/if}
+				${asset.name}
+				</td></tr>
+			#{/list}
+			#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
+			</tbody></table>
 		</div>
 		<div class="span8">
-			<table class="condensed-table">
-				<tbody>
-				#{list items:primaryInfoAssets, as:"asset"}
-				<tr>
-					<td>${asset.name}</td>
-					<td class="tail"><a class="btn small" href="@{RiskController.deletePrimaryAsset(asset.id)}">&{"form.delete"}</a></td>
-				</tr>
-				#{/list}
-				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
-				</tbody>
-			</table>
+			<table class="condensed-table"><tbody>
+			#{list items:primaryInfoAssets, as:"asset"}
+				<tr><td class='activator' primary-data-id="${asset.id}" data-controls-modal="primary-modal" data-backdrop="true" data-keyboard="true">
+				#{if asset.icon}<img class='icon' src="${play.configuration.getProperty('external.fugue.path')}${asset.icon}"/>#{/if}
+				${asset.name}
+				</td></tr>
+			#{/list}
+			#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
+			</tbody></table>
 		</div>
 	</div>
 	<div class="row">
 		<div class="span8">
-		#{form @RiskController.addPrimaryAsset()}
+		#{form @PrimaryAssetController.add()}
 			<input name="type" type="hidden" value="${models.PrimaryAsset.Type.PROCESS}"/>
-			<div class="clearfix">
-				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
-			</div>
+			<input class="span7" name="name" type="text" title="&{"form.new"}"/>
 		#{/form}
 		</div>
 		<div class="span8">
-		#{form @RiskController.addPrimaryAsset()}
+		#{form @PrimaryAssetController.add()}
 			<input name="type" type="hidden" value="${models.PrimaryAsset.Type.INFO}"/>
-			<div class="clearfix">
-				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
-			</div>
+			<input class="span7" name="name" type="text" title="&{"form.new"}"/>
 		#{/form}
 		</div>
 	</div>
@@ -76,53 +65,39 @@
 	</div>
 	<div class="row">
 		<div class="span8">
-			<table class="condensed-table">
-				<tbody>
-				#{list items:supportingHardwareAssets, as:"asset"}
-				<tr>
-					<td>${asset.name}</td>
-					<td class="tail">
-						<a asset-id="${asset.id}" class="select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small">&{"page.asset.supporting.link.start"}</a>
-						<a class="btn small" href="@{RiskController.deleteSupportingAsset(asset.id)}">&{"form.delete"}</a>
-					</td>
-				</tr>
-				#{/list}
-				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
-				</tbody>
-			</table>
+			<table class="condensed-table"><tbody>
+			#{list items:supportingHardwareAssets, as:"asset"}
+			<tr><td class='activator' supporting-data-id="${asset.id}" data-controls-modal="supporting-modal" data-backdrop="true" data-keyboard="true">
+				#{if asset.icon}<img class='icon' src="${play.configuration.getProperty('external.fugue.path')}${asset.icon}"/>#{/if}
+			${asset.name}
+			</td></tr>
+			#{/list}
+			#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
+			</tbody></table>
 		</div>
 		<div class="span8">
-			<table class="condensed-table">
-				<tbody>
-				#{list items:supportingSoftwareAssets, as:"asset"}
-				<tr>
-					<td>${asset.name}</td>
-					<td class="tail">
-						<a asset-id="${asset.id}" class="select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small">&{"page.asset.supporting.link.start"}</a>
-						<a class="btn small" href="@{RiskController.deleteSupportingAsset(asset.id)}">&{"form.delete"}</a>
-					</td>
-				</tr>
-				#{/list}
-				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
-				</tbody>
-			</table>
+			<table class="condensed-table"><tbody>
+			#{list items:supportingSoftwareAssets, as:"asset"}
+			<tr><td class='activator' supporting-data-id="${asset.id}" data-controls-modal="supporting-modal" data-backdrop="true" data-keyboard="true">
+				#{if asset.icon}<img class='icon' src="${play.configuration.getProperty('external.fugue.path')}${asset.icon}"/>#{/if}
+			${asset.name}
+			</td></tr>
+			#{/list}
+			#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
+			</tbody></table>
 		</div>
 	</div>
 	<div class="row">
 		<div class="span8">
-		#{form @RiskController.addSupportingAsset()}
+		#{form @SupportingAssetController.add()}
 			<input name="type" type="hidden" value="${models.SupportingAsset.Type.HARDWARE}"/>
-			<div class="clearfix">
-				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
-			</div>
+			<input class="span7" name="name" type="text" title="&{"form.new"}"/>
 		#{/form}
 		</div>
 		<div class="span8">
-		#{form @RiskController.addSupportingAsset()}
+		#{form @SupportingAssetController.add()}
 			<input name="type" type="hidden" value="${models.SupportingAsset.Type.SOFTWARE}"/>
-			<div class="clearfix">
-				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
-			</div>
+			<input class="span7" name="name" type="text" title="&{"form.new"}"/>
 		#{/form}
 		</div>
 	</div>
@@ -169,20 +144,20 @@
 	</div>
 	<div class="row">
 		<div class="span8">
-		#{form @RiskController.addSupportingAsset()}
+		*{#{form @RiskController.addSupportingAsset()}}*
 			<input name="type" type="hidden" value="${models.SupportingAsset.Type.NETWORK}"/>
 			<div class="clearfix">
 				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
 			</div>
-		#{/form}
+		*{#{/form}}*
 		</div>
 		<div class="span8">
-		#{form @RiskController.addSupportingAsset()}
+		*{#{form @RiskController.addSupportingAsset()}}*
 			<input name="type" type="hidden" value="${models.SupportingAsset.Type.PERSONNEL}"/>
 			<div class="clearfix">
 				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
 			</div>
-		#{/form}
+		*{#{/form}}*
 		</div>
 	</div>
 </div>
@@ -228,105 +203,23 @@
 	</div>
 	<div class="row">
 		<div class="span8">
-		#{form @RiskController.addSupportingAsset()}
+		*{#{form @RiskController.addSupportingAsset()}}*
 			<input name="type" type="hidden" value="${models.SupportingAsset.Type.SITE}"/>
 			<div class="clearfix">
 				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
 			</div>
-		#{/form}
+		*{#{/form}}*
 		</div>
 		<div class="span8">
-		#{form @RiskController.addSupportingAsset()}
+		*{#{form @RiskController.addSupportingAsset()}}*
 			<input name="type" type="hidden" value="${models.SupportingAsset.Type.ORGANIZATION}"/>
 			<div class="clearfix">
 				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
 			</div>
-		#{/form}
+		*{#{/form}}*
 		</div>
 	</div>
 </div>
-
-<div id="primary-asset-modal" class="modal hide">
-	<div class="modal-body">
-	#{form @RiskController.bindToPrimaryAsset()}
-		<input type="hidden" name="assetId"/>
-
-		<h2>&{"page.asset.primary.process"}</h2>
-
-		<ul class="inputs-list">
-			#{list items:primaryProcessAssets, as:"asset"}
-				<li>
-					<label>
-						<input type="checkbox" name="primaryAssetId[]" value="${asset.id}"/>
-						<span>${asset.name}</span>
-					</label>
-				</li>
-			#{/list}
-			#{else}<li>&{"page.asset.nothing"}</li>#{/else}
-		</ul>
-
-		<h2>&{"page.asset.primary.info"}</h2>
-
-		<ul class="inputs-list">
-			#{list items:primaryInfoAssets, as:"asset"}
-				<li>
-					<label>
-						<input type="checkbox" name="primaryAssetId[]" value="${asset.id}"/>
-						<span>${asset.name}</span>
-					</label>
-				</li>
-			#{/list}
-			#{else}<li>&{"page.asset.nothing"}</li>#{/else}
-		</ul>
-
-	#{/form}
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn primary">&{"form.save"}</a>
-		<a href="#" class="btn secondary">&{"form.cancel"}</a>
-	</div>
-</div>
-
-<script type="text/javascript">
-	$(function() {
-		var id = 0;
-
-		$("#primary-asset-modal").modal({keyboard:true,backdrop:true});
-
-		$(".select-primary-asset").click(function() {
-			id = $(this).attr("asset-id");
-			$("#primary-asset-modal").modal("show");
-		});
-
-		$("#primary-asset-modal").bind("show",function() {
-			var values = {
-			#{list items:supportingAssets, as:"asset"}
-				"${asset.id}" : [#{list items:asset.primaryAssets, as:"primaryAsset"}${primaryAsset.id},#{/list}],
-			#{/list}
-			};
-
-			$("#primary-asset-modal input[type='checkbox']").removeAttr("checked");
-
-			$.each(values,function(i,value) {
-				if (i == id) {
-					$("#primary-asset-modal input[name='assetId']").attr("value",id);
-
-					$.each(value,function(j,v) {
-						$("#primary-asset-modal input[type='checkbox'][value='" + v + "']").attr("checked","true");
-					});
-				}
-			});
-		});
-
-		$("#primary-asset-modal a.primary").click(function() {
-			$("#primary-asset-modal form").submit();
-		});
-
-		$("#primary-asset-modal a.secondary").click(function() {
-			$("#primary-asset-modal").modal("hide");
-		});
-	});
-</script>
 
 <div id="primary-modal" class="modal hide">
 	<div class="modal-body">
@@ -335,36 +228,252 @@
 		<form action="#">
 			<div class="clearfix">
 				<label>&{'page.asset.icon'}</label>
-				<div class="input icons"></div>
+				<div class="input icons icon"></div>
+			</div>
+			<div class="clearfix">
+				<label>&{'page.asset.owner'}</label>
+				<div class="input owner"><input class="span7" type="text"/></div>
+			</div>
+			<div class="clearfix">
+				<label>&{'page.asset.criticality'}</label>
+				<div class="input icons criticality">
+					<a class="btn"></a><a class="btn"></a><a class="btn"></a><a class="btn"></a><a class="btn"></a>
+				</div>
 			</div>
 		</form>
 	</div>
 	<div class="modal-footer">
 		<a href="#" class="btn primary">&{"form.close"}</a>
+		<a href="#" class="btn danger">&{"form.delete"}</a>
+	</div>
+</div>
+
+<div id="supporting-modal" class="modal hide">
+	<div class="modal-body">
+		<h1></h1>
+
+		<form action="#">
+			<div class="clearfix">
+				<label>&{'page.asset.icon'}</label>
+				<div class="input icons icon"></div>
+			</div>
+			<div class="clearfix">
+				<label>&{'page.asset.owner'}</label>
+				<div class="input owner"><input class="span7" type="text"/></div>
+			</div>
+			<div class="clearfix">
+				<label>&{'page.asset.primary.process'}</label>
+				<div class="input process"></div>
+			</div>
+			<div class="clearfix">
+				<label>&{'page.asset.primary.info'}</label>
+				<div class="input info"></div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn primary">&{"form.close"}</a>
+		<a href="#" class="btn danger">&{"form.delete"}</a>
 	</div>
 </div>
 
 <script type="text/javascript">
 	$(function() {
-		var renderModal = function(modal,data) {
+		var sourcePrimaryList = #{jsAction @PrimaryAssetController.list(":type")/};
+		var sourcePrimaryGet = #{jsAction @PrimaryAssetController.get(":id")/};
+		var sourcePrimaryDelete = #{jsAction @PrimaryAssetController.delete(":id")/};
+		var sourcePrimaryIconSet = #{jsAction @PrimaryAssetController.setIcon(":id",":value")/};
+		var sourcePrimaryOwnerSet = #{jsAction @PrimaryAssetController.setOwner(":id",":value")/};
+		var sourcePrimaryCriticalitySet = #{jsAction @PrimaryAssetController.setCriticality(":id",":value")/};
+		var sourceSupportingGet = #{jsAction @SupportingAssetController.get(":id")/};
+		var sourceSupportingDelete = #{jsAction @SupportingAssetController.delete(":id")/};
+		var sourceSupportingIconSet = #{jsAction @SupportingAssetController.setIcon(":id",":value")/};
+		var sourceSupportingOwnerSet = #{jsAction @SupportingAssetController.setOwner(":id",":value")/};
+		var sourceSupportingBind = #{jsAction @SupportingAssetController.bind(":id",":value")/};
+		var sourceSupportingUnbind = #{jsAction @SupportingAssetController.unbind(":id",":value")/};
+
+		var renderPrimaryModal = function(modal,data) {
 			modal.find("h1").text(data.name);
 
-			var icons = modal.find(".icons");
-			icons.empty();
-			$.each(data.icons,function(i) {
-				var btn = $(document.createElement("a"));
-				btn.attr("data-id",data.id);
-				btn.addClass("btn");
-				btn.css("background-image","url(${play.configuration.getProperty('external.fugue.path')}" + data.icons[i] + ")");
-				icons.append(btn);
+			var icons = modal.find(".icon");
+			if (data.icons.length) {
+				icons.empty();
+				$.each(data.icons,function(i) {
+					var btn = $(document.createElement("a"));
+					btn.attr("data-icon",data.icons[i]);
+					btn.addClass("btn");
+					if (data.icon == data.icons[i]) {
+						btn.addClass("selected");
+					}
+					btn.css("background-image","url(${play.configuration.getProperty('external.fugue.path')}" + data.icons[i] + ")");
+					btn.click(function() {
+						$.post(sourcePrimaryIconSet({id: data.id, value: $(this).attr("data-icon")}),function(data) {
+							renderPrimaryModal(modal,data)
+						});
+					});
+					icons.append(btn);
+				});
+			}
+			else {
+				icons.parent().hide();
+			}
+
+			var owner = modal.find(".owner input");
+			owner.attr("value",data.owner);
+			owner.change(function() {
+				$.post(sourcePrimaryOwnerSet({id: data.id, value: $(this).attr("value")}));
+			});
+
+			var criticality = modal.find(".icons.criticality .btn");
+			$.each(criticality,function(i) {
+				var btn = criticality.eq(i);
+				var clazz = data.criticality == i ? "star.png" : "star-empty.png";
+				if (data.criticality == i) {
+					btn.addClass("selected");
+				}
+				else {
+					btn.removeClass("selected");
+				}
+				btn.css("background-image","url('${play.configuration.getProperty('external.fugue.path')}star.png')");
+				btn.click(function() {
+					$.post(sourcePrimaryCriticalitySet({id: data.id, value: $(this).parent().find("> *").index(this)}),function(data) {
+						renderPrimaryModal(modal,data)
+					});
+				});
+			});
+
+			var deleteBtn = modal.find(".btn.danger");
+			deleteBtn.click(function() {
+				$.post(sourcePrimaryDelete({id: data.id}),function() {
+					location.reload();
+				});
+			});
+
+			var closeBtn = modal.find(".btn.primary");
+			closeBtn.click(function() {
+				location.reload();
+			});
+
+			$(this).bind("hide",function() {
+				location.reload();
 			});
 		};
 
-		var sourcePrimaryGet = #{jsAction @PrimaryAssetController.get(":id")/};
+		var renderSupportingModal = function(modal,data) {
+			modal.find("h1").text(data.name);
 
-		$("a[primary-data-id]").click(function() {
+			var icons = modal.find(".icon");
+			if (data.icons.length) {
+				icons.empty();
+				$.each(data.icons,function(i) {
+					var btn = $(document.createElement("a"));
+					btn.attr("data-icon",data.icons[i]);
+					btn.addClass("btn");
+					if (data.icon == data.icons[i]) {
+						btn.addClass("selected");
+					}
+					btn.css("background-image","url(${play.configuration.getProperty('external.fugue.path')}" + data.icons[i] + ")");
+					btn.click(function() {
+						$.post(sourceSupportingIconSet({id: data.id, value: $(this).attr("data-icon")}),function(data) {
+							renderSupportingModal(modal,data)
+						});
+					});
+					icons.append(btn);
+				});
+			}
+			else {
+				icons.parent().hide();
+			}
+
+			var owner = modal.find(".owner input");
+			owner.attr("value",data.owner);
+			owner.change(function() {
+				$.post(sourceSupportingOwnerSet({id: data.id, value: $(this).attr("value")}));
+			});
+
+			var buildList = function(data2) {
+				var ul = $(document.createElement("ul"));
+				ul.addClass("inputs-list");
+				$.each(data2,function(i) {
+					var li = $(document.createElement("li"));
+					var label = $(document.createElement("label"));
+					var box = $(document.createElement("input"));
+					box.attr("type","checkbox");
+					$.each(data.primaryAssets,function(j) {
+						if (data2[i].id == data.primaryAssets[j].id) {
+							box.prop("checked",true);
+						}
+					});
+					box.click(function() {
+						if (box.prop("checked")) {
+							$.post(sourceSupportingBind({id: data.id, value: data2[i].id}));
+						}
+						else {
+							$.post(sourceSupportingUnbind({id: data.id, value: data2[i].id}));
+						}
+					});
+					label.append(box);
+					var span = $(document.createElement("span"));
+					var img = $(document.createElement("img"));
+					img.addClass("icon");
+					img.attr("src","${play.configuration.getProperty("external.fugue.path")}" + data2[i].icon);
+					span.append(img);
+					span.append(data2[i].name);
+					label.append(span);
+					li.append(label);
+					ul.append(li);
+				});
+				return ul;
+			};
+
+			var process = modal.find(".process");
+			process.empty();
+			$.get(sourcePrimaryList({type: "PROCESS"}),function(data2) {
+				if (data2.length) {
+					process.append(buildList(data2));
+				}
+				else {
+					process.parent().hide();
+				}
+			});
+
+			var info = modal.find(".info");
+			info.empty();
+			$.get(sourcePrimaryList({type: "INFO"}),function(data2) {
+				if (data2.length) {
+					info.append(buildList(data2));
+				}
+				else {
+					info.parent().hide();
+				}
+			});
+
+			var deleteBtn = modal.find(".btn.danger");
+			deleteBtn.click(function() {
+				$.post(sourceSupportingDelete({id: data.id}),function() {
+					location.reload();
+				});
+			});
+
+			var closeBtn = modal.find(".btn.primary");
+			closeBtn.click(function() {
+				location.reload();
+			});
+
+			$(this).bind("hide",function() {
+				location.reload();
+			});
+		};
+
+		$(".activator[primary-data-id]").click(function() {
 			$.get(sourcePrimaryGet({id: $(this).attr("primary-data-id")}),function(data) {
-				renderModal($("#primary-modal"),data)
+				renderPrimaryModal($("#primary-modal"),data)
+			});
+		});
+
+		$(".activator[supporting-data-id]").click(function() {
+			$.get(sourceSupportingGet({id: $(this).attr("supporting-data-id")}),function(data) {
+				renderSupportingModal($("#supporting-modal"),data)
 			});
 		});
 

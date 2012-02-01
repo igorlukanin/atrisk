@@ -10,9 +10,6 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Risk extends Model {
     @ManyToOne
-    public RiskScope scope;
-
-    @ManyToOne
     @JoinTable(
             name = "risk_supportingasset",
             joinColumns = @JoinColumn(name = "risk_id"),
@@ -35,9 +32,8 @@ public class Risk extends Model {
     public int nature = 2; // 0..4
     public int image = 2; // 0..4
 
-    public static Risk create(RiskScope scope,SupportingAsset asset,Threat threat) {
+    public static Risk create(SupportingAsset asset,Threat threat) {
         Risk risk = new Risk();
-        risk.scope = scope;
         risk.asset = asset;
         risk.threat = threat;
         return risk.save();

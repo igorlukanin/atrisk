@@ -9,7 +9,7 @@ import models.SupportingAsset;
 import models.Threat;
 import play.data.validation.Validation;
 import play.mvc.Controller;
-import util.Parser;
+import util.ScalarHelper;
 
 import java.util.List;
 
@@ -74,80 +74,6 @@ public class RiskController extends Controller {
         render();
     }
 
-    public static void addPrimaryAsset(String name,String type) {
-        validation.required(name);
-        validation.required(type);
-
-        if (! Validation.hasErrors()) {
-            for (PrimaryAsset.Type t : PrimaryAsset.Type.values()) {
-                if (type.equals(t.toString())) {
-                    PrimaryAsset.create(RiskScope.findBySession(session),name,t);
-                    asset();
-                }
-            }
-        }
-
-        asset();
-    }
-
-    public static void deletePrimaryAsset(long id) {
-        PrimaryAsset asset = PrimaryAsset.findById(id);
-
-        if (null != asset) {            
-            asset.delete();
-        }
-
-        asset();
-    }
-
-    public static void addSupportingAsset(String name,String type) {
-        validation.required(name);
-        validation.required(type);
-
-        if (! Validation.hasErrors()) {
-            for (SupportingAsset.Type t : SupportingAsset.Type.values()) {
-                if (type.equals(t.toString())) {
-                    SupportingAsset.create(RiskScope.findBySession(session),name,t);
-                    asset();
-                }
-            }
-        }
-
-        asset();
-    }
-
-    public static void deleteSupportingAsset(long id) {
-        SupportingAsset asset = SupportingAsset.findById(id);
-
-        if (null != asset) {
-            asset.delete();
-        }
-
-        asset();
-    }
-
-    public static void bindToPrimaryAsset(long assetId,long[] primaryAssetId) {
-        SupportingAsset asset = SupportingAsset.findById(assetId);
-
-        if (null != asset) {
-            asset.primaryAssets.clear();
-
-            if (null != primaryAssetId) {
-                for (Long primaryId : primaryAssetId) {
-                    PrimaryAsset primaryAsset = PrimaryAsset.findById(primaryId);
-
-                    if (null != primaryAsset) {
-                        asset.primaryAssets.add(primaryAsset);
-                    }
-                }
-            }
-
-            asset.save();
-        }
-
-        asset();
-    }
-
     public static void threat() {
         renderArgs.put("threats",Threat.find("order by name").fetch());
         renderArgs.put("fmThreats",Threat.find("type = ? order by name",Threat.Type.FORCE_MAJEURE).fetch());
@@ -172,7 +98,7 @@ public class RiskController extends Controller {
         if (! Validation.hasErrors()) {
             for (Threat.Type t : Threat.Type.values()) {
                 if (type.equals(t.toString())) {
-                    Threat.create(RiskScope.findBySession(session),name,t);
+                    Threat.create(name,t);
                     threat();
                 }
             }
@@ -203,7 +129,7 @@ public class RiskController extends Controller {
 
                     if (null != asset) {
                         threat.assets.add(asset);
-                        Risk.create(RiskScope.findBySession(session),asset,threat);
+                        Risk.create(asset,threat);
                     }
                 }
             }
@@ -239,7 +165,7 @@ public class RiskController extends Controller {
         if (! Validation.hasErrors()) {
             for (Control.Type t : Control.Type.values()) {
                 if (type.equals(t.toString())) {
-                    Control.create(RiskScope.findBySession(session),name,t);
+                    Control.create(name,t);
                     control();
                 }
             }
@@ -312,7 +238,7 @@ public class RiskController extends Controller {
     public static void setOverall(Long id,int value) {
         try {
             Risk risk = Risk.findById(id);
-            risk.overall = Parser.bound(value,0,4);
+            risk.overall = ScalarHelper.bound(value,0,4);
             risk.save();
 
             get(id);
@@ -325,7 +251,7 @@ public class RiskController extends Controller {
     public static void setRecovery(Long id,int value) {
         try {
             Risk risk = Risk.findById(id);
-            risk.recovery = Parser.bound(value,0,Integer.MAX_VALUE);
+            risk.recovery = ScalarHelper.bound(value,0,Integer.MAX_VALUE);
             risk.save();
 
             get(id);
@@ -338,7 +264,7 @@ public class RiskController extends Controller {
     public static void setWorktime(Long id,int value) {
         try {
             Risk risk = Risk.findById(id);
-            risk.worktime = Parser.bound(value,0,Integer.MAX_VALUE);
+            risk.worktime = ScalarHelper.bound(value,0,Integer.MAX_VALUE);
             risk.save();
 
             get(id);
@@ -351,7 +277,7 @@ public class RiskController extends Controller {
     public static void setMoney(Long id,int value) {
         try {
             Risk risk = Risk.findById(id);
-            risk.money = Parser.bound(value,0,Integer.MAX_VALUE);
+            risk.money = ScalarHelper.bound(value,0,Integer.MAX_VALUE);
             risk.save();
 
             get(id);
@@ -364,7 +290,7 @@ public class RiskController extends Controller {
     public static void setHuman(Long id,int value) {
         try {
             Risk risk = Risk.findById(id);
-            risk.human = Parser.bound(value,0,4);
+            risk.human = ScalarHelper.bound(value,0,4);
             risk.save();
 
             get(id);
@@ -377,7 +303,7 @@ public class RiskController extends Controller {
     public static void setNature(Long id,int value) {
         try {
             Risk risk = Risk.findById(id);
-            risk.nature = Parser.bound(value,0,4);
+            risk.nature = ScalarHelper.bound(value,0,4);
             risk.save();
 
             get(id);
@@ -390,7 +316,7 @@ public class RiskController extends Controller {
     public static void setImage(Long id,int value) {
         try {
             Risk risk = Risk.findById(id);
-            risk.image = Parser.bound(value,0,4);
+            risk.image = ScalarHelper.bound(value,0,4);
             risk.save();
 
             get(id);

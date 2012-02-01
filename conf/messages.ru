@@ -23,11 +23,12 @@ form.login.validation.username-unavailable=Имя пользователя за�
 action.logout=Выход
 
 form.new=...
-form.delete=✕
+form.delete=Удалить
 form.save=Сохранить
 form.cancel=Отмена
 form.info=...
 form.close=Закрыть
+form.no-icon=Не нашлось...
 
 menu.main=Обзор
 menu.context=Контекст
@@ -52,6 +53,8 @@ page.asset.supporting.site=Местоположения
 page.asset.supporting.organization=Организационная структура
 page.asset.supporting.link.start=Основные активы
 page.asset.icon=Иконка
+page.asset.owner=Владелец
+page.asset.criticality=Критичность
 
 page.threat.nothing=Ни одной угрозы.
 page.threat.fm=Непреодолимые обстоятельства
