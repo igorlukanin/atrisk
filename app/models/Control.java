@@ -2,7 +2,6 @@ package models;
 
 import play.db.jpa.Model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -21,10 +20,17 @@ public class Control extends Model {
         CONTINGENCY
     }
     
-    @ManyToOne public RiskScope scope;
+    @ManyToOne
+    public RiskScope scope;
+
     public String name;
-    @Enumerated(EnumType.ORDINAL) public Type type;
-    @ManyToMany(cascade = CascadeType.ALL) public List<SupportingAsset> assets;
+
+    @Enumerated(EnumType.ORDINAL)
+    public Type type;
+
+    @ManyToMany
+    public List<SupportingAsset> assets;
+
     public boolean implemented;
     public boolean effective;
 

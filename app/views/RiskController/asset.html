@@ -1,289 +1,289 @@
-#{extends 'risk.html'/}
-#{set title:messages.get('project.name')/}
-#{set 'moreScripts'}
-	#{script 'bing-translate.js'/}
-#{/set}
+#{extends "risk.html"/}
+#{set title:messages.get("project.name")/}
 
-<div class='container'>
-	<div class='row'>
-		<div class='span16'><h1>&{'page.id.asset.primary'}</h1></div>
+<div class="container">
+	<div class="row">
+		<div class="span16"><h1>&{"page.asset.primary"}</h1></div>
 	</div>
 </div>
 
-<div class='container'>
-	<div class='row'>
-		<div class='span8'><h2>&{'page.id.asset.primary.process'}</h2></div>
-		<div class='span8'><h2>&{'page.id.asset.primary.info'}</h2></div>
+<div class="container">
+	<div class="row">
+		<div class="span8"><h2>&{"page.asset.primary.process"}</h2></div>
+		<div class="span8"><h2>&{"page.asset.primary.info"}</h2></div>
 	</div>
-	<div class='row'>
-		<div class='span8'>
-			<table class='condensed-table'>
+	<div class="row">
+		<div class="span8">
+			<table class="condensed-table">
 				<tbody>
-				#{list items:primaryProcessAssets, as:'asset'}
-					<tr>
-						<td>${asset.name}</td>
-						<td class='tail'><a class='btn small' href='@{RiskController.deletePrimaryAsset(asset.id)}'>&{'form.delete'}</a></td>
-					</tr>
+				#{list items:primaryProcessAssets, as:"asset"}
+				<tr>
+					<td>${asset.name}</td>
+					<td class="tail">
+						<a primary-data-id="${asset.id}" class="btn small" data-controls-modal="primary-modal" data-backdrop="true" data-keyboard="true">&{"form.info"}</a>
+						<a class="btn small" href="@{RiskController.deletePrimaryAsset(asset.id)}">&{"form.delete"}</a>
+					</td>
+				</tr>
 				#{/list}
-				#{else}<tr><td>&{'page.id.asset.nothing'}</td></tr>#{/else}
+				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
 				</tbody>
 			</table>
 		</div>
-		<div class='span8'>
-			<table class='condensed-table'>
+		<div class="span8">
+			<table class="condensed-table">
 				<tbody>
-				#{list items:primaryInfoAssets, as:'asset'}
-					<tr>
-						<td>${asset.name}</td>
-						<td class='tail'><a class='btn small' href='@{RiskController.deletePrimaryAsset(asset.id)}'>&{'form.delete'}</a></td>
-					</tr>
+				#{list items:primaryInfoAssets, as:"asset"}
+				<tr>
+					<td>${asset.name}</td>
+					<td class="tail"><a class="btn small" href="@{RiskController.deletePrimaryAsset(asset.id)}">&{"form.delete"}</a></td>
+				</tr>
 				#{/list}
-				#{else}<tr><td>&{'page.id.asset.nothing'}</td></tr>#{/else}
+				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<div class='row'>
-		<div class='span8'>
+	<div class="row">
+		<div class="span8">
 		#{form @RiskController.addPrimaryAsset()}
-			<input name='type' type='hidden' value='${models.PrimaryAsset.Type.PROCESS}'/>
-			<div class='clearfix'>
-				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			<input name="type" type="hidden" value="${models.PrimaryAsset.Type.PROCESS}"/>
+			<div class="clearfix">
+				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
 			</div>
 		#{/form}
 		</div>
-		<div class='span8'>
+		<div class="span8">
 		#{form @RiskController.addPrimaryAsset()}
-			<input name='type' type='hidden' value='${models.PrimaryAsset.Type.INFO}'/>
-			<div class='clearfix'>
-				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			<input name="type" type="hidden" value="${models.PrimaryAsset.Type.INFO}"/>
+			<div class="clearfix">
+				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
 			</div>
 		#{/form}
 		</div>
 	</div>
 </div>
 
-<div class='container'>
-	<div class='row'>
-		<div class='span16'><h1>&{'page.id.asset.supporting'}</h1></div>
+<div class="container">
+	<div class="row">
+		<div class="span16"><h1>&{"page.asset.supporting"}</h1></div>
 	</div>
 </div>
 
-<div class='container'>
-	<div class='row'>
-		<div class='span8'><h2>&{'page.id.asset.supporting.hardware'}</h2></div>
-		<div class='span8'><h2>&{'page.id.asset.supporting.software'}</h2></div>
+<div class="container">
+	<div class="row">
+		<div class="span8"><h2>&{"page.asset.supporting.hardware"}</h2></div>
+		<div class="span8"><h2>&{"page.asset.supporting.software"}</h2></div>
 	</div>
-	<div class='row'>
-		<div class='span8'>
-			<table class='condensed-table'>
+	<div class="row">
+		<div class="span8">
+			<table class="condensed-table">
 				<tbody>
-				#{list items:supportingHardwareAssets, as:'asset'}
-					<tr>
-						<td>${asset.name}</td>
-						<td class='tail'>
-							<a asset-id='${asset.id}' class='select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small'>&{'page.id.asset.supporting.link.start'}</a>
-							<a class='btn small' href='@{RiskController.deleteSupportingAsset(asset.id)}'>&{'form.delete'}</a>
-						</td>
-					</tr>
+				#{list items:supportingHardwareAssets, as:"asset"}
+				<tr>
+					<td>${asset.name}</td>
+					<td class="tail">
+						<a asset-id="${asset.id}" class="select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small">&{"page.asset.supporting.link.start"}</a>
+						<a class="btn small" href="@{RiskController.deleteSupportingAsset(asset.id)}">&{"form.delete"}</a>
+					</td>
+				</tr>
 				#{/list}
-				#{else}<tr><td>&{'page.id.asset.nothing'}</td></tr>#{/else}
+				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
 				</tbody>
 			</table>
 		</div>
-		<div class='span8'>
-			<table class='condensed-table'>
+		<div class="span8">
+			<table class="condensed-table">
 				<tbody>
-				#{list items:supportingSoftwareAssets, as:'asset'}
-					<tr>
-						<td>${asset.name}</td>
-						<td class='tail'>
-							<a asset-id='${asset.id}' class='select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small'>&{'page.id.asset.supporting.link.start'}</a>
-							<a class='btn small' href='@{RiskController.deleteSupportingAsset(asset.id)}'>&{'form.delete'}</a>
-						</td>
-					</tr>
+				#{list items:supportingSoftwareAssets, as:"asset"}
+				<tr>
+					<td>${asset.name}</td>
+					<td class="tail">
+						<a asset-id="${asset.id}" class="select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small">&{"page.asset.supporting.link.start"}</a>
+						<a class="btn small" href="@{RiskController.deleteSupportingAsset(asset.id)}">&{"form.delete"}</a>
+					</td>
+				</tr>
 				#{/list}
-				#{else}<tr><td>&{'page.id.asset.nothing'}</td></tr>#{/else}
+				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<div class='row'>
-		<div class='span8'>
+	<div class="row">
+		<div class="span8">
 		#{form @RiskController.addSupportingAsset()}
-			<input name='type' type='hidden' value='${models.SupportingAsset.Type.HARDWARE}'/>
-			<div class='clearfix'>
-				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			<input name="type" type="hidden" value="${models.SupportingAsset.Type.HARDWARE}"/>
+			<div class="clearfix">
+				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
 			</div>
 		#{/form}
 		</div>
-		<div class='span8'>
+		<div class="span8">
 		#{form @RiskController.addSupportingAsset()}
-			<input name='type' type='hidden' value='${models.SupportingAsset.Type.SOFTWARE}'/>
-			<div class='clearfix'>
-				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
-			</div>
-		#{/form}
-		</div>
-	</div>
-</div>
-
-<div class='container'>
-	<div class='row'>
-		<div class='span8'><h2>&{'page.id.asset.supporting.network'}</h2></div>
-		<div class='span8'><h2>&{'page.id.asset.supporting.personnel'}</h2></div>
-	</div>
-	<div class='row'>
-		<div class='span8'>
-			<table class='condensed-table'>
-				<tbody>
-				#{list items:supportingNetworkAssets, as:'asset'}
-					<tr>
-						<td>${asset.name}</td>
-						<td class='tail'>
-							<a asset-id='${asset.id}' class='select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small'>&{'page.id.asset.supporting.link.start'}</a>
-							<a class='btn small' href='@{RiskController.deleteSupportingAsset(asset.id)}'>&{'form.delete'}</a>
-						</td>
-					</tr>
-				#{/list}
-				#{else}<tr><td>&{'page.id.asset.nothing'}</td></tr>#{/else}
-				</tbody>
-			</table>
-		</div>
-		<div class='span8'>
-			<table class='condensed-table'>
-				<tbody>
-				#{list items:supportingPersonnelAssets, as:'asset'}
-					<tr>
-						<td>${asset.name}</td>
-						<td class='tail'>
-							<a asset-id='${asset.id}' class='select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small'>&{'page.id.asset.supporting.link.start'}</a>
-							<a class='btn small' href='@{RiskController.deleteSupportingAsset(asset.id)}'>&{'form.delete'}</a>
-						</td>
-					</tr>
-				#{/list}
-				#{else}<tr><td>&{'page.id.asset.nothing'}</td></tr>#{/else}
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class='row'>
-		<div class='span8'>
-		#{form @RiskController.addSupportingAsset()}
-			<input name='type' type='hidden' value='${models.SupportingAsset.Type.NETWORK}'/>
-			<div class='clearfix'>
-				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
-			</div>
-		#{/form}
-		</div>
-		<div class='span8'>
-		#{form @RiskController.addSupportingAsset()}
-			<input name='type' type='hidden' value='${models.SupportingAsset.Type.PERSONNEL}'/>
-			<div class='clearfix'>
-				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			<input name="type" type="hidden" value="${models.SupportingAsset.Type.SOFTWARE}"/>
+			<div class="clearfix">
+				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
 			</div>
 		#{/form}
 		</div>
 	</div>
 </div>
 
-<div class='container'>
-	<div class='row'>
-		<div class='span8'><h2>&{'page.id.asset.supporting.site'}</h2></div>
-		<div class='span8'><h2>&{'page.id.asset.supporting.organization'}</h2></div>
+<div class="container">
+	<div class="row">
+		<div class="span8"><h2>&{"page.asset.supporting.network"}</h2></div>
+		<div class="span8"><h2>&{"page.asset.supporting.personnel"}</h2></div>
 	</div>
-	<div class='row'>
-		<div class='span8'>
-			<table class='condensed-table'>
+	<div class="row">
+		<div class="span8">
+			<table class="condensed-table">
 				<tbody>
-				#{list items:supportingSiteAssets, as:'asset'}
-					<tr>
-						<td>${asset.name}</td>
-						<td class='tail'>
-							<a asset-id='${asset.id}' class='select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small'>&{'page.id.asset.supporting.link.start'}</a>
-							<a class='btn small' href='@{RiskController.deleteSupportingAsset(asset.id)}'>&{'form.delete'}</a>
-						</td>
-					</tr>
+				#{list items:supportingNetworkAssets, as:"asset"}
+				<tr>
+					<td>${asset.name}</td>
+					<td class="tail">
+						<a asset-id="${asset.id}" class="select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small">&{"page.asset.supporting.link.start"}</a>
+						<a class="btn small" href="@{RiskController.deleteSupportingAsset(asset.id)}">&{"form.delete"}</a>
+					</td>
+				</tr>
 				#{/list}
-				#{else}<tr><td>&{'page.id.asset.nothing'}</td></tr>#{/else}
+				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
 				</tbody>
 			</table>
 		</div>
-		<div class='span8'>
-			<table class='condensed-table'>
+		<div class="span8">
+			<table class="condensed-table">
 				<tbody>
-				#{list items:supportingOrganizationAssets, as:'asset'}
-					<tr>
-						<td>${asset.name}</td>
-						<td class='tail'>
-							<a asset-id='${asset.id}' class='select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small'>&{'page.id.asset.supporting.link.start'}</a>
-							<a class='btn small' href='@{RiskController.deleteSupportingAsset(asset.id)}'>&{'form.delete'}</a>
-						</td>
-					</tr>
+				#{list items:supportingPersonnelAssets, as:"asset"}
+				<tr>
+					<td>${asset.name}</td>
+					<td class="tail">
+						<a asset-id="${asset.id}" class="select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small">&{"page.asset.supporting.link.start"}</a>
+						<a class="btn small" href="@{RiskController.deleteSupportingAsset(asset.id)}">&{"form.delete"}</a>
+					</td>
+				</tr>
 				#{/list}
-				#{else}<tr><td>&{'page.id.asset.nothing'}</td></tr>#{/else}
+				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<div class='row'>
-		<div class='span8'>
+	<div class="row">
+		<div class="span8">
 		#{form @RiskController.addSupportingAsset()}
-			<input name='type' type='hidden' value='${models.SupportingAsset.Type.SITE}'/>
-			<div class='clearfix'>
-				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			<input name="type" type="hidden" value="${models.SupportingAsset.Type.NETWORK}"/>
+			<div class="clearfix">
+				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
 			</div>
 		#{/form}
 		</div>
-		<div class='span8'>
+		<div class="span8">
 		#{form @RiskController.addSupportingAsset()}
-			<input name='type' type='hidden' value='${models.SupportingAsset.Type.ORGANIZATION}'/>
-			<div class='clearfix'>
-				<input class='span8' name='name' type='text' title='&{'form.new'}'/>
+			<input name="type" type="hidden" value="${models.SupportingAsset.Type.PERSONNEL}"/>
+			<div class="clearfix">
+				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
 			</div>
 		#{/form}
 		</div>
 	</div>
 </div>
 
-<div id='primary-asset-modal' class='modal hide'>
+<div class="container">
+	<div class="row">
+		<div class="span8"><h2>&{"page.asset.supporting.site"}</h2></div>
+		<div class="span8"><h2>&{"page.asset.supporting.organization"}</h2></div>
+	</div>
+	<div class="row">
+		<div class="span8">
+			<table class="condensed-table">
+				<tbody>
+				#{list items:supportingSiteAssets, as:"asset"}
+				<tr>
+					<td>${asset.name}</td>
+					<td class="tail">
+						<a asset-id="${asset.id}" class="select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small">&{"page.asset.supporting.link.start"}</a>
+						<a class="btn small" href="@{RiskController.deleteSupportingAsset(asset.id)}">&{"form.delete"}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+		<div class="span8">
+			<table class="condensed-table">
+				<tbody>
+				#{list items:supportingOrganizationAssets, as:"asset"}
+				<tr>
+					<td>${asset.name}</td>
+					<td class="tail">
+						<a asset-id="${asset.id}" class="select-primary-asset btn #{ifnot asset.primaryAssets.size()}primary#{/ifnot} small">&{"page.asset.supporting.link.start"}</a>
+						<a class="btn small" href="@{RiskController.deleteSupportingAsset(asset.id)}">&{"form.delete"}</a>
+					</td>
+				</tr>
+				#{/list}
+				#{else}<tr><td>&{"page.asset.nothing"}</td></tr>#{/else}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span8">
+		#{form @RiskController.addSupportingAsset()}
+			<input name="type" type="hidden" value="${models.SupportingAsset.Type.SITE}"/>
+			<div class="clearfix">
+				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
+			</div>
+		#{/form}
+		</div>
+		<div class="span8">
+		#{form @RiskController.addSupportingAsset()}
+			<input name="type" type="hidden" value="${models.SupportingAsset.Type.ORGANIZATION}"/>
+			<div class="clearfix">
+				<input class="span8" name="name" type="text" title="&{"form.new"}"/>
+			</div>
+		#{/form}
+		</div>
+	</div>
+</div>
+
+<div id="primary-asset-modal" class="modal hide">
 	<div class="modal-body">
-		#{form @RiskController.bindToPrimaryAsset()}
+	#{form @RiskController.bindToPrimaryAsset()}
 		<input type="hidden" name="assetId"/>
 
-		<h2>&{'page.id.asset.primary.process'}</h2>
+		<h2>&{"page.asset.primary.process"}</h2>
 
 		<ul class="inputs-list">
-		#{list items:primaryProcessAssets, as:'asset'}
-			<li>
-				<label>
-					<input type="checkbox" name="primaryAssetId[]" value='${asset.id}'/>
-					<span>${asset.name}</span>
-				</label>
-			</li>
-		#{/list}
-		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+			#{list items:primaryProcessAssets, as:"asset"}
+				<li>
+					<label>
+						<input type="checkbox" name="primaryAssetId[]" value="${asset.id}"/>
+						<span>${asset.name}</span>
+					</label>
+				</li>
+			#{/list}
+			#{else}<li>&{"page.asset.nothing"}</li>#{/else}
 		</ul>
 
-		<h2>&{'page.id.asset.primary.info'}</h2>
+		<h2>&{"page.asset.primary.info"}</h2>
 
 		<ul class="inputs-list">
-		#{list items:primaryInfoAssets, as:'asset'}
-			<li>
-				<label>
-					<input type="checkbox" name="primaryAssetId[]" value='${asset.id}'/>
-					<span>${asset.name}</span>
-				</label>
-			</li>
-		#{/list}
-		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+			#{list items:primaryInfoAssets, as:"asset"}
+				<li>
+					<label>
+						<input type="checkbox" name="primaryAssetId[]" value="${asset.id}"/>
+						<span>${asset.name}</span>
+					</label>
+				</li>
+			#{/list}
+			#{else}<li>&{"page.asset.nothing"}</li>#{/else}
 		</ul>
 
-		#{/form}
+	#{/form}
 	</div>
-	<div class='modal-footer'>
-		<a href='#' class='btn primary'>&{'form.save'}</a>
-		<a href='#' class='btn secondary'>&{'form.cancel'}</a>
+	<div class="modal-footer">
+		<a href="#" class="btn primary">&{"form.save"}</a>
+		<a href="#" class="btn secondary">&{"form.cancel"}</a>
 	</div>
 </div>
 
@@ -291,17 +291,17 @@
 	$(function() {
 		var id = 0;
 
-		$('#primary-asset-modal').modal({keyboard:true,backdrop:true});
+		$("#primary-asset-modal").modal({keyboard:true,backdrop:true});
 
-		$('.select-primary-asset').click(function() {
+		$(".select-primary-asset").click(function() {
 			id = $(this).attr("asset-id");
-			$('#primary-asset-modal').modal('show');
+			$("#primary-asset-modal").modal("show");
 		});
 
 		$("#primary-asset-modal").bind("show",function() {
 			var values = {
-			#{list items:supportingAssets, as:'asset'}
-				'${asset.id}' : [#{list items:asset.primaryAssets, as:'primaryAsset'}${primaryAsset.id},#{/list}],
+			#{list items:supportingAssets, as:"asset"}
+				"${asset.id}" : [#{list items:asset.primaryAssets, as:"primaryAsset"}${primaryAsset.id},#{/list}],
 			#{/list}
 			};
 
@@ -324,6 +324,50 @@
 
 		$("#primary-asset-modal a.secondary").click(function() {
 			$("#primary-asset-modal").modal("hide");
+		});
+	});
+</script>
+
+<div id="primary-modal" class="modal hide">
+	<div class="modal-body">
+		<h1></h1>
+
+		<form action="#">
+			<div class="clearfix">
+				<label>&{'page.asset.icon'}</label>
+				<div class="input icons">
+					<a class="btn"></a><a class="btn"></a><a class="btn"></a><a class="btn"></a><a class="btn"></a></div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn primary">&{"form.close"}</a>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		var renderModal = function(modal,data) {
+			modal.find("h1").text(data.name);
+
+			var icons = modal.find(".icons .btn");
+			icons.attr("data-id",data.id);
+			icons.removeClass("selected");
+			console.log(data.icons);
+			icons.eq(0).css("background-image","url(${play.configuration.getProperty('external.fugue.path')}" + data.icons[0] + ")");
+//			icons.eq(data.icon).addClass("primary");
+		};
+
+		var sourcePrimaryGet = #{jsAction @PrimaryAssetController.get(":id")/};
+
+		$("a[primary-data-id]").click(function() {
+			$.get(sourcePrimaryGet({id: $(this).attr("primary-data-id")}),function(data) {
+				renderModal($("#primary-modal"),data)
+			});
+		});
+
+		$(".modal .btn.primary").click(function() {
+			$(this).parents(".modal:first").modal("hide");
 		});
 	});
 </script>

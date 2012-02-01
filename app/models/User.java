@@ -6,7 +6,6 @@ import play.db.jpa.Model;
 import play.i18n.Messages;
 import play.mvc.Scope;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import java.util.ArrayList;
@@ -16,7 +15,9 @@ import java.util.List;
 public class User extends Model {
     public String username;
     public String passwordHash;
-    @ManyToMany(cascade = CascadeType.ALL) public List<RiskScope> scopes = new ArrayList<RiskScope>();
+
+    @ManyToMany
+    public List<RiskScope> scopes = new ArrayList<RiskScope>();
     
     public static User create(String username,String password) {
         User user = new User();

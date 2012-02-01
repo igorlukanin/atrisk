@@ -3,8 +3,8 @@
 
 <div class='container'>
 	<div class='row'>
-		<div class='span8'><h2>&{'page.id.control.in'}</h2></div>
-		<div class='span8'><h2>&{'page.id.control.or'}</h2></div>
+		<div class='span8'><h2>&{'page.control.in'}</h2></div>
+		<div class='span8'><h2>&{'page.control.or'}</h2></div>
 	</div>
 	<div class='row'>
 		<div class='span8'>
@@ -15,12 +15,12 @@
 					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
 					<td class='tail'>
 						<a control-id='${control.id}' class='select-additional-info btn small'>&{'form.info'}</a>
-						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
+						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.control.link.start'}</a>
 						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
 					</td>
 				</tr>
 				#{/list}
-				#{else}<tr><td>&{'page.id.control.nothing'}</td></tr>#{/else}
+				#{else}<tr><td>&{'page.control.nothing'}</td></tr>#{/else}
 				</tbody>
 			</table>
 		</div>
@@ -32,12 +32,12 @@
 					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
 					<td class='tail'>
 						<a control-id='${control.id}' class='select-additional-info btn small'>&{'form.info'}</a>
-						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
+						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.control.link.start'}</a>
 						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
 					</td>
 				</tr>
 				#{/list}
-				#{else}<tr><td>&{'page.id.control.nothing'}</td></tr>#{/else}
+				#{else}<tr><td>&{'page.control.nothing'}</td></tr>#{/else}
 				</tbody>
 			</table>
 		</div>
@@ -64,8 +64,8 @@
 
 <div class='container'>
 	<div class='row'>
-		<div class='span8'><h2>&{'page.id.control.pe'}</h2></div>
-		<div class='span8'><h2>&{'page.id.control.hs'}</h2></div>
+		<div class='span8'><h2>&{'page.control.pe'}</h2></div>
+		<div class='span8'><h2>&{'page.control.hs'}</h2></div>
 	</div>
 	<div class='row'>
 		<div class='span8'>
@@ -76,12 +76,12 @@
 					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
 					<td class='tail'>
 						<a control-id='${control.id}' class='select-additional-info btn small'>&{'form.info'}</a>
-						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
+						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.control.link.start'}</a>
 						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
 					</td>
 				</tr>
 				#{/list}
-				#{else}<tr><td>&{'page.id.control.nothing'}</td></tr>#{/else}
+				#{else}<tr><td>&{'page.control.nothing'}</td></tr>#{/else}
 				</tbody>
 			</table>
 		</div>
@@ -93,12 +93,12 @@
 					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
 					<td class='tail'>
 						<a control-id='${control.id}' class='select-additional-info btn small'>&{'form.info'}</a>
-						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
+						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.control.link.start'}</a>
 						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
 					</td>
 				</tr>
 				#{/list}
-				#{else}<tr><td>&{'page.id.control.nothing'}</td></tr>#{/else}
+				#{else}<tr><td>&{'page.control.nothing'}</td></tr>#{/else}
 				</tbody>
 			</table>
 		</div>
@@ -125,8 +125,8 @@
 
 <div class='container'>
 	<div class='row'>
-		<div class='span8'><h2>&{'page.id.control.co'}</h2></div>
-		<div class='span8'><h2>&{'page.id.control.cy'}</h2></div>
+		<div class='span8'><h2>&{'page.control.co'}</h2></div>
+		<div class='span8'><h2>&{'page.control.cy'}</h2></div>
 	</div>
 	<div class='row'>
 		<div class='span8'>
@@ -137,12 +137,12 @@
 					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
 					<td class='tail'>
 						<a control-id='${control.id}' class='select-additional-info btn small'>&{'form.info'}</a>
-						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
+						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.control.link.start'}</a>
 						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
 					</td>
 				</tr>
 				#{/list}
-				#{else}<tr><td>&{'page.id.control.nothing'}</td></tr>#{/else}
+				#{else}<tr><td>&{'page.control.nothing'}</td></tr>#{/else}
 				</tbody>
 			</table>
 		</div>
@@ -154,12 +154,12 @@
 					<td><span class='#{ifnot control.implemented}unexistent#{/ifnot} #{ifnot control.effective}useless#{/ifnot}'>${control.name}</span></td>
 					<td class='tail'>
 						<a control-id='${control.id}' class='select-additional-info btn small'>&{'form.info'}</a>
-						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.id.control.link.start'}</a>
+						<a control-id='${control.id}' class='select-primary-control btn #{ifnot control.assets.size()}primary#{/ifnot} small'>&{'page.control.link.start'}</a>
 						<a class='btn small' href='@{RiskController.deleteControl(control.id)}'>&{'form.delete'}</a>
 					</td>
 				</tr>
 				#{/list}
-				#{else}<tr><td>&{'page.id.control.nothing'}</td></tr>#{/else}
+				#{else}<tr><td>&{'page.control.nothing'}</td></tr>#{/else}
 				</tbody>
 			</table>
 		</div>
@@ -195,13 +195,13 @@
 			<li>
 				<label>
 					<input type="checkbox" name="implemented"/>
-					<span>&{'page.id.control.implemented'}</span>
+					<span>&{'page.control.implemented'}</span>
 				</label>
 			</li>
 			<li>
 				<label>
 					<input type="checkbox" name="effective"/>
-					<span>&{'page.id.control.effective'}</span>
+					<span>&{'page.control.effective'}</span>
 				</label>
 			</li>
 		</ul>
@@ -218,7 +218,7 @@
 		#{form @RiskController.bindControlToAsset()}
 		<input type="hidden" name="controlId"/>
 
-		<h2>&{'page.id.asset.supporting.hardware'}</h2>
+		<h2>&{'page.asset.supporting.hardware'}</h2>
 
 		<ul class="inputs-list">
 		#{list items:supportingHardwareAssets, as:'asset'}
@@ -229,10 +229,10 @@
 				</label>
 			</li>
 		#{/list}
-		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		#{else}<li>&{'page.asset.nothing'}</li>#{/else}
 		</ul>
 
-		<h2>&{'page.id.asset.supporting.software'}</h2>
+		<h2>&{'page.asset.supporting.software'}</h2>
 
 		<ul class="inputs-list">
 		#{list items:supportingSoftwareAssets, as:'asset'}
@@ -243,10 +243,10 @@
 				</label>
 			</li>
 		#{/list}
-		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		#{else}<li>&{'page.asset.nothing'}</li>#{/else}
 		</ul>
 
-		<h2>&{'page.id.asset.supporting.network'}</h2>
+		<h2>&{'page.asset.supporting.network'}</h2>
 
 		<ul class="inputs-list">
 		#{list items:supportingNetworkAssets, as:'asset'}
@@ -257,10 +257,10 @@
 				</label>
 			</li>
 		#{/list}
-		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		#{else}<li>&{'page.asset.nothing'}</li>#{/else}
 		</ul>
 
-		<h2>&{'page.id.asset.supporting.personnel'}</h2>
+		<h2>&{'page.asset.supporting.personnel'}</h2>
 
 		<ul class="inputs-list">
 		#{list items:supportingPersonnelAssets, as:'asset'}
@@ -271,10 +271,10 @@
 				</label>
 			</li>
 		#{/list}
-		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		#{else}<li>&{'page.asset.nothing'}</li>#{/else}
 		</ul>
 
-		<h2>&{'page.id.asset.supporting.site'}</h2>
+		<h2>&{'page.asset.supporting.site'}</h2>
 
 		<ul class="inputs-list">
 		#{list items:supportingSiteAssets, as:'asset'}
@@ -285,10 +285,10 @@
 				</label>
 			</li>
 		#{/list}
-		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		#{else}<li>&{'page.asset.nothing'}</li>#{/else}
 		</ul>
 
-		<h2>&{'page.id.asset.supporting.organization'}</h2>
+		<h2>&{'page.asset.supporting.organization'}</h2>
 
 		<ul class="inputs-list">
 		#{list items:supportingOrganizationAssets, as:'asset'}
@@ -299,7 +299,7 @@
 				</label>
 			</li>
 		#{/list}
-		#{else}<li>&{'page.id.asset.nothing'}</li>#{/else}
+		#{else}<li>&{'page.asset.nothing'}</li>#{/else}
 		</ul>
 
 		#{/form}

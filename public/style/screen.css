@@ -114,8 +114,21 @@ span.useless {
 	text-decoration: line-through;
 }
 
-.input.stars .btn {
+.input.stars .btn, .input.icons .btn {
+    height: 24px;
     margin-right: 1em;
+    padding: 0;
+    width: 24px;
+}
+
+.input.icons .btn {
+    background: #ffffff no-repeat 50% 50%;
+    border-radius: 0;
+    border: solid 1px #bfbfbf;
+}
+
+.input.icons .btn .selected {
+    border-color: #00438a;
 }
 
 input[type="text"].aligned {

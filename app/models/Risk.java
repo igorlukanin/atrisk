@@ -2,15 +2,31 @@ package models;
 
 import play.db.jpa.Model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Risk extends Model {
-    @ManyToOne public RiskScope scope;
-    @ManyToOne(cascade = CascadeType.ALL) public SupportingAsset asset;
-    @ManyToOne(cascade = CascadeType.ALL) public Threat threat;
+    @ManyToOne
+    public RiskScope scope;
+
+    @ManyToOne
+    @JoinTable(
+            name = "risk_supportingasset",
+            joinColumns = @JoinColumn(name = "risk_id"),
+            inverseJoinColumns = @JoinColumn(name = "supportingasset_id"))
+    public SupportingAsset asset;
+
+
+    @ManyToOne
+    @JoinTable(
+            name = "risk_threat",
+            joinColumns = @JoinColumn(name = "risk_id"),
+            inverseJoinColumns = @JoinColumn(name = "threat_id"))
+    public Threat threat;
+
     public int overall = 2; // 0..4
     public int recovery = 0; // 0..∞
     public int worktime = 0; // 0..∞

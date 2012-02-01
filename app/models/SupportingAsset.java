@@ -2,10 +2,11 @@ package models;
 
 import play.db.jpa.Model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -23,13 +24,25 @@ public class SupportingAsset extends Model {
         ORGANIZATION
     }
     
-    @ManyToOne public RiskScope scope;
+    @ManyToOne
+    public RiskScope scope;
+
     public String name;
-    @Enumerated(EnumType.ORDINAL) public Type type;
-    @ManyToMany(cascade = CascadeType.ALL) public List<PrimaryAsset> primaryAssets;
-    
-    @OneToMany(cascade = CascadeType.ALL) List<Risk> risks;
-    @ManyToMany(cascade = CascadeType.ALL) List<Threat> threats;
+
+    @Enumerated(EnumType.ORDINAL)
+    public Type type;
+
+    @ManyToMany public List<PrimaryAsset> primaryAssets;
+
+    @OneToMany(mappedBy = "asset",orphanRemoval = true)
+    List<Risk> risks;
+
+    @ManyToMany
+    @JoinTable(
+            name = "supportingasset_threat",
+            joinColumns = @JoinColumn(name = "supportingasset_id"),
+            inverseJoinColumns = @JoinColumn(name = "threat_id"))
+    List<Threat> threats;
 
     public static SupportingAsset create(RiskScope scope,String name,Type type) {
         SupportingAsset asset = new SupportingAsset();

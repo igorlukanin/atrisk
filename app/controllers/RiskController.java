@@ -2,8 +2,8 @@ package controllers;
 
 import flexjson.JSONSerializer;
 import models.Control;
-import models.Risk;
 import models.PrimaryAsset;
+import models.Risk;
 import models.RiskScope;
 import models.SupportingAsset;
 import models.Threat;
@@ -93,7 +93,7 @@ public class RiskController extends Controller {
     public static void deletePrimaryAsset(long id) {
         PrimaryAsset asset = PrimaryAsset.findById(id);
 
-        if (null != asset) {
+        if (null != asset) {            
             asset.delete();
         }
 

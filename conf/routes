@@ -31,6 +31,8 @@ POST /control/info                                  RiskController.setControlInf
 GET  /risk                                          RiskController.risk
 GET  /treatment                                     RiskController.treatment
 
+GET  /api/primary-asset/{id}                        PrimaryAssetController.get
+
 GET  /api/risk/{id}                                 RiskController.get
 POST /api/risk/{id}/overall                         RiskController.setOverall
 POST /api/risk/{id}/recovery                        RiskController.setRecovery
