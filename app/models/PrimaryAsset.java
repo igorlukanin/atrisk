@@ -34,15 +34,17 @@ public class PrimaryAsset extends Model {
         List<String> icons = new ArrayList<String>();
         
         try {
-            for (String part : translatedName.toLowerCase().split(" ")) {
-                List<Icon> partIcons = Icon.find("name like ?","%" + (4 < part.length() ? part.substring(0,4) : part) + "%").fetch();
-                
-                for (Icon icon : partIcons) {
+            String[] parts = translatedName.toLowerCase().split(" ");
+
+            for (String part : parts) {
+                String word = part.length() > 4 ? part.substring(0,4) : part;
+
+                for (Icon icon : Icon.find("name like ?","%" + word + "%").<Icon>fetch(12 / parts.length)) {
                     icons.add(icon.name);
                 }
             }
         }
-        catch (Exception e) {}
+        catch (Exception e) {e.printStackTrace();}
 
         return(icons);
     }

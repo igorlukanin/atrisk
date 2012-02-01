@@ -117,6 +117,7 @@ span.useless {
 .input.stars .btn, .input.icons .btn {
     height: 24px;
     margin-right: 1em;
+    margin-bottom: 1em;
     padding: 0;
     width: 24px;
 }

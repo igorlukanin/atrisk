@@ -335,8 +335,7 @@
 		<form action="#">
 			<div class="clearfix">
 				<label>&{'page.asset.icon'}</label>
-				<div class="input icons">
-					<a class="btn"></a><a class="btn"></a><a class="btn"></a><a class="btn"></a><a class="btn"></a></div>
+				<div class="input icons"></div>
 			</div>
 		</form>
 	</div>
@@ -350,12 +349,15 @@
 		var renderModal = function(modal,data) {
 			modal.find("h1").text(data.name);
 
-			var icons = modal.find(".icons .btn");
-			icons.attr("data-id",data.id);
-			icons.removeClass("selected");
-			console.log(data.icons);
-			icons.eq(0).css("background-image","url(${play.configuration.getProperty('external.fugue.path')}" + data.icons[0] + ")");
-//			icons.eq(data.icon).addClass("primary");
+			var icons = modal.find(".icons");
+			icons.empty();
+			$.each(data.icons,function(i) {
+				var btn = $(document.createElement("a"));
+				btn.attr("data-id",data.id);
+				btn.addClass("btn");
+				btn.css("background-image","url(${play.configuration.getProperty('external.fugue.path')}" + data.icons[i] + ")");
+				icons.append(btn);
+			});
 		};
 
 		var sourcePrimaryGet = #{jsAction @PrimaryAssetController.get(":id")/};
